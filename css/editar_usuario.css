@@ -1,0 +1,193 @@
+body {
+    background-color: #e1ca96;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-logo img {
+    width: 3.3rem;
+    height: 3.3rem;
+    margin-top: 0.5rem;
+}
+
+.header-logo h1 {
+    font-family: "Island Moments", cursive;
+    font-size: 4rem;
+    font-weight: normal;
+    color: #434a42;
+    margin: 0;
+}
+
+.header-logo {
+    margin-top: 0.5rem;
+    display: flex;
+}
+
+.header-links {
+    display: flex;
+    gap: 2rem;
+    margin: 1.7rem 6rem;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    font-weight: normal;
+    margin-top: 0.5rem;
+}
+
+.seleccionado {
+    font-weight: bold;
+}
+
+.boton {
+    border-radius: 0.4rem;
+    border-style: none;
+    background-color: #7e6363;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    text-decoration: none;
+    font-size: small;
+}
+
+.boton:hover {
+    background-color: #644f4f;
+    cursor: pointer;
+}
+
+.banner {
+    background-color: #aca885;
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtitulo h2 {
+    font-size: 2.8rem;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: normal;
+    margin: 2.5rem 0 1.5rem 5.5rem;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario-agregar {
+    background-color: #e1ca96;
+    padding: 40px;
+    /* Aumento del padding */
+    border-radius: 10px;
+    width: 30rem;
+}
+
+.formulario-agregar label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.formulario-agregar input[type="text"],
+.formulario-agregar input[type="number"],
+.formulario-agregar input[type="email"],
+.formulario-agregar input[type="password"],
+.formulario-agregar textarea {
+    width: calc(100% - 1.8rem);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.icon-container {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.icon-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.password-icono {
+    width: 1.5rem;
+    margin-left: -2.2rem;
+    margin-bottom: -.3rem;
+    color: #434a42;
+}
+
+.ver-password:hover {
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.boton {
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .7rem 1.2rem;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.boton:hover {
+    background-color: #644f4f;
+    cursor: pointer;
+}
+
+.botones {
+    width: calc(100% - 1.8rem);
+    display: flex;
+    justify-content: space-between;
+}
+
+#alerta_verde {
+    margin: 0;
+    padding: 1rem;
+    color: black;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(55, 203, 55);
+}
+
+#alerta_roja {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(185, 56, 56);
+}
+
+.cont-cerrar-sesion {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 5rem;
+}
+
+.cerrar-sesion {
+    border-radius: 0.4rem;
+    border-style: none;
+    background-color: rgb(185, 56, 56);
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-size: small;
+}
+
+.cerrar-sesion:hover {
+    background-color: rgb(149, 46, 46);
+    cursor: pointer;
+}

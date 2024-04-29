@@ -1,0 +1,274 @@
+body {
+    background-color: #E1CA96;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-logo img {
+    width: 3.3rem;
+    height: 3.3rem;
+    margin-top: .5rem;
+}
+
+.header-logo h1 {
+    font-family: "Island Moments", cursive;
+    font-size: 4rem;
+    font-weight: normal;
+    color: #434A42;
+    margin: 0;
+}
+
+.header-logo {
+    margin-top: .5rem;
+    display: flex;
+    /* float: left; */
+}
+
+.header-links {
+    /* float: right; */
+    display: flex;
+    gap: 2rem;
+    margin: 1.7rem 6rem;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    font-weight: normal;
+    margin-top: .5rem;
+}
+
+.boton {
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .7rem 1.2rem;
+    text-decoration: none;
+    font-size: small;
+}
+
+.boton:hover {
+    background-color: #644f4f;
+    cursor: pointer;
+}
+
+.seleccionado {
+    font-weight: bold;
+}
+
+.banner {
+    background-color: #ACA885;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.subtitulo h2 {
+    font-size: 3.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: normal;
+    margin: 2.5rem 0 1.5rem 5.5rem;
+}
+
+
+.contenedor-productos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem 10rem;
+    margin: 3rem;
+    width: 100%;
+}
+
+.producto {
+    display: flex;
+    background-color: white;
+    width: 75%;
+    /* height: 17rem; */
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+.cont-img {
+    text-align: center;
+}
+
+.cont-img img {
+    max-width: 8rem;
+}
+
+.cont-precio-boton {
+    margin-left: auto;
+}
+
+.eliminar-carrito {
+    /* display: inline-block; */
+    text-align: center;
+    background-color: #626C66;
+    color: white;
+    height: 1.8rem;
+    border-style: none;
+    border-radius: 1rem;
+    padding: .4rem 1.5rem 0 1.5rem;
+    margin-top: 4rem;
+    width: 9rem;
+    text-decoration: none;
+    float: right;
+}
+
+.eliminar-carrito:hover {
+    background-color: #644f4f;
+    cursor: pointer;
+}
+
+.precio-producto {
+    margin: .2rem 0 0 0;
+    color: #426B1F;
+}
+
+.titulo-producto {
+    padding: 1.2rem 0;
+}
+
+.cantidad {
+    display: flex;
+    margin-top: .5rem;
+}
+
+.total-cantidad {
+    color: #426B1F;
+}
+
+.label-cantidad {
+    margin: .2rem 0 0 0;
+    color: #426B1F;
+}
+
+.cantida-producto {
+    width: 1.5rem;
+    margin-left: 1rem;
+    text-align: center;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+
+.actualizar-total {
+    display: flex;
+    justify-content: space-between;
+    width: 77%;
+    margin-bottom: 10rem;
+}
+
+.total-label {
+    margin: .3rem 1rem 0 0;
+    font-size: 2.5rem;
+    font-weight: normal;
+}
+
+.btn-pago {
+    font-size: 1.2rem;
+    border-radius: 1rem;
+}
+
+.carrito-total {
+    display: flex;
+}
+
+.actualizar-carrito {
+    font-size: 1.2rem;
+    border-radius: 1rem;
+}
+
+.carrito-vacio {
+    margin-top: 10rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.form-productos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#cerrar-sesion {
+    display: none;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+
+    border-radius: .4rem;
+    border-style: none;
+    background-color: rgb(185, 56, 56);
+    padding: .7rem 1.2rem;
+    font-size: small;
+}
+
+#cerrar-sesion:hover {
+    background-color: rgb(212, 63, 63);
+    cursor: pointer;
+}
+
+#elemento {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.hover-cerrar {
+    background-color: white;
+    padding: 1rem;
+    border-radius: .5rem;
+    position: absolute;
+    margin-left: 14rem;
+}
+
+.btn-carrito {
+    max-height: 1rem;
+}
+
+.stock-producto {
+    display: flex;
+    margin-top: .5rem;
+    margin: .2rem 1.5rem 0 0;
+    color: #426B1F;
+}
+
+.stock-producto span {
+    font-weight: lighter;
+    margin-left: .5rem;
+    color: black;
+}
+
+#alerta_verde {
+    margin: 0;
+    padding: 1rem;
+    color: black;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(55, 203, 55);
+}
+
+#alerta_roja {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(185, 56, 56);
+}

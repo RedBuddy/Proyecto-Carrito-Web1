@@ -1,0 +1,141 @@
+body {
+    font-family: 'Inter';
+    background-color: #918B76;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+.contenedor-sesion {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.contenedor-sesion-panel {
+    padding: 2rem .5rem 2rem .5rem;
+    background-color: #503C3C;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    width: 25%;
+}
+
+.sesion-icono {
+    display: flex;
+    justify-content: center;
+}
+
+.icono-cont-img {
+    background-color: #7E6363;
+    padding: 2rem;
+    border-radius: 50%;
+    border: .1rem solid white;
+    width: 7rem;
+}
+
+.icono-img {
+    max-width: 7rem;
+}
+
+.sesion-campos {
+    margin-top: 3rem;
+}
+
+.sesion-campos input {
+    background-color: #503C3C;
+    border: none;
+    border-bottom: .13rem solid white;
+    width: 90%;
+    color: white;
+    /* Borde inferior */
+}
+
+.sesion-campos input::placeholder {
+    color: white;
+}
+
+.sesion-campos .password {
+    margin-top: 3.5rem;
+}
+
+.sesion-registrarse {
+    text-align: left;
+    margin-left: 1.1rem;
+    margin-top: 1.2rem;
+}
+
+.sesion-registrarse p {
+    margin-bottom: .5rem;
+}
+
+.link-registro {
+    color: #E1CA96;
+    text-decoration: none;
+}
+
+.link-registro:hover {
+    color: #E1CA9680;
+}
+
+.sesion-botones {
+    margin-top: 6rem;
+
+}
+
+.boton {
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .6rem 1.1rem;
+    width: 40%;
+}
+
+.boton:hover {
+    background-color: #7e636380;
+    cursor: pointer;
+}
+
+.btn-ingresar {
+    float: left;
+    margin-left: 1.1rem;
+}
+
+.btn-restaurar {
+    float: right;
+    margin-right: 1.1rem;
+}
+
+.password-icono {
+    width: 1.5rem;
+    margin-left: -2rem;
+    margin-bottom: -.3rem;
+}
+
+.ver-password:hover {
+    cursor: pointer;
+}
+
+#login-error {
+    color: rgb(226, 106, 106);
+}
+
+.btn-usuarios {
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .6rem 1.1rem;
+    margin-top: 1rem;
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+}
+
+.btn-usuarios:hover {
+    background-color: #7e636380;
+    cursor: pointer;
+}

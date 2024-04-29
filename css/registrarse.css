@@ -1,0 +1,174 @@
+body {
+    font-family: 'Inter';
+    background-color: #918B76;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+.contenedor-registro {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.contenedor-registro-panel {
+    padding: 2rem .5rem 2rem .5rem;
+    background-color: #503C3C;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    width: 25%;
+}
+
+.registro-icono {
+    display: flex;
+    justify-content: center;
+}
+
+.icono-cont-img {
+    background-color: #7E6363;
+    padding: 2rem;
+    border-radius: 50%;
+    border: .1rem solid white;
+    width: 7rem;
+}
+
+.icono-img {
+    max-width: 7rem;
+}
+
+
+.registro-campos input {
+    background-color: #503C3C;
+    border: none;
+    border-bottom: .13rem solid white;
+    width: 90%;
+    color: white;
+    margin-top: 2rem;
+}
+
+.registro-campos input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+
+.registro-botones {
+    margin-top: 3rem;
+}
+
+.boton {
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .6rem 1.1rem;
+    width: 40%;
+}
+
+.boton:hover {
+    background-color: #7e636380;
+    cursor: pointer;
+}
+
+.btn-enviar {
+    float: left;
+    margin-left: 1.1rem;
+}
+
+.btn-reset {
+    float: right;
+    margin-right: 1.1rem;
+    padding: .6rem .3rem;
+    text-decoration: none;
+}
+
+.password-icono {
+    width: 1.5rem;
+    margin-left: -2rem;
+    margin-bottom: -.3rem;
+}
+
+.ver-password:hover {
+    cursor: pointer;
+}
+
+.ver-password-c:hover {
+    cursor: pointer;
+}
+
+
+.exito-cont-img {
+    /* display: flex;
+    justify-content: center; */
+    background-color: #7E6363;
+    padding: 2rem;
+    border-radius: 50%;
+    border: .1rem solid white;
+    width: 12rem;
+}
+
+.exito-img {
+    max-width: 11rem;
+}
+
+.exito-titulo {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.exito-h1 {
+    margin: 2rem 0 8rem 0;
+}
+
+.btn-continuar {
+    padding: .5rem 3rem;
+    text-decoration: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+    color: yellow;
+}
+
+#registro-error {
+    margin-top: 2rem;
+    color: rgb(226, 106, 106);
+    width: 90%;
+    margin-left: 1rem;
+}
+
+.btn-eliminar {
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .6rem 1.1rem;
+    width: 90%;
+    margin-top: 1rem;
+    margin-left: 1.2rem;
+}
+
+.btn-eliminar:hover {
+    background-color: #7e636380;
+    cursor: pointer;
+}
+
+.form-eliminar {
+    width: 25%;
+    background-color: #503C3C;
+    padding: 0 .5rem 1rem .5rem;
+}
