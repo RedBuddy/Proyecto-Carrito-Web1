@@ -1,0 +1,58 @@
+
+CREATE TABLE usuarios (
+    ID int NOT NULL AUTO_INCREMENT,
+    Nombre varchar(100) NOT NULL,
+    Edad INT NOT NULL,
+    Email varchar(100) NOT NULL,
+    Usuario varchar(100) NOT NULL,
+    Contrasena varbinary(100) NOT NULL,
+    Verificado BOOLEAN NOT NULL DEFAULT FALSE,
+    CONSTRAINT PK_Usuario PRIMARY KEY (ID)
+);
+
+INSERT INTO `usuarios` (`ID`, `Nombre`, `Edad`, `Email`, `Usuario`, `Contrasena`, `Verificado`) VALUES (NULL, 'administrador', '99', 'admin@gmail.com', 'admin', 0x24327924313024454b71512e4b596e42375a6d734a30325972334265756a52697239426c6e656457762e304e66553953756e5a2f424c5067755a724b, TRUE)
+
+CREATE TABLE productos (
+    ID int NOT NULL AUTO_INCREMENT,
+    Nombre varchar(100) NOT NULL,
+    Descripcion varchar(100),
+    Precio DECIMAL(10, 2) NOT NULL,
+    Imagen varchar(150) NOT NULL,
+    Activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT PK_Productos PRIMARY KEY (ID)
+);
+
+INSERT INTO productos VALUES (NULL,'NESCAFÉ® Taster`s Choice® Caramel Dark Chocolate', NULL,150,'../img/productos/producto1.webp', TRUE),
+(NULL,'NESCAFÉ® Taster`s Choice® Tostado y Molido', NULL,250,'../img/productos/producto2.webp', TRUE),
+(NULL,'NESTLÉ® COFFEE MATE® Almendra', NULL,90,'../img/productos/producto3.webp', TRUE),
+(NULL,'NESTLÉ® COFFEE MATE® Coco', NULL,90,'../img/productos/producto4.webp', TRUE),
+(NULL,'NESTLÉ® COFFEE MATE® Polvo Extra Cremoso', NULL,95,'../img/productos/producto5.webp', TRUE),
+(NULL,'NESCAFÉ® Black: Tostado Intenso', NULL,120,'../img/productos/producto6.webp', TRUE);
+
+CREATE TABLE almacen (
+    ID int NOT NULL AUTO_INCREMENT,
+    ProductoID int NOT NULL,
+    Stock int NOT NULL DEFAULT 0,
+    CONSTRAINT PK_Almacen PRIMARY KEY (ID),
+    CONSTRAINT FK_Almacen_Productos FOREIGN KEY (ProductoID) REFERENCES productos(ID)
+);
+
+INSERT INTO almacen VALUES (NULL, 1,100),
+(NULL, 2,100),
+(NULL, 3,100),
+(NULL, 4,100),
+(NULL, 5,100),
+(NULL, 6,100);
+
+
+CREATE TABLE mensajes (
+    ID int NOT NULL AUTO_INCREMENT,
+    Usuario varchar(100) NOT NULL,
+    Nombre varchar(100) NOT NULL,
+    Correo varchar(100) NOT NULL,
+    Mensaje TEXT NOT NULL,
+    Visto BOOLEAN NOT NULL DEFAULT FALSE,
+    CONSTRAINT PK_Mensajes PRIMARY KEY (ID)
+);
+
+INSERT INTO mensajes (Usuario, Nombre, Correo, Mensaje) VALUES ('admin', 'orlando', 'orlando@orlando.com', 'mensaje si sisisi')
