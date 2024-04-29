@@ -1,0 +1,141 @@
+body {
+  background-color: #E1CA96;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-logo img {
+  width: 3.3rem;
+  height: 3.3rem;
+  margin-top: .5rem;
+}
+
+.header-logo h1 {
+  font-family: "Island Moments", cursive;
+  font-size: 4rem;
+  font-weight: normal;
+  color: #434A42;
+  margin: 0;
+}
+
+.header-logo {
+  margin-top: .5rem;
+  display: flex;
+  text-decoration: none;
+}
+
+.header-links {
+  /* float: right; */
+  display: flex;
+  gap: 2rem;
+  margin: 1.7rem 6rem;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-weight: normal;
+  margin-top: .5rem;
+}
+
+.boton {
+  border-radius: .4rem;
+  border-style: none;
+  background-color: #7E6363;
+  color: white;
+  padding: .7rem 1.2rem;
+  text-decoration: none;
+  font-size: small;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: #644f4f;
+}
+
+.seleccionado {
+  font-weight: bold;
+}
+
+.banner {
+  background-color: #ACA885;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.subtitulo h2 {
+  font-size: 3.5rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: normal;
+  margin: 2.5rem 0 1.5rem 5.5rem;
+}
+
+.gestion-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.link-gestion {
+  border-radius: .4rem;
+  border-style: none;
+  background-color: #7E6363;
+  color: white;
+  padding: .7rem 1.2rem;
+  text-decoration: none;
+  font-size: small;
+  margin: 0 .5rem;
+  cursor: pointer;
+}
+
+.link-gestion:hover {
+  background-color: #644f4f;
+}
+
+.tabla-ventas {
+  margin: 20px auto;
+  max-width: 900px;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-ventas table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-ventas th,
+.tabla-ventas td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.tabla-ventas th {
+  background-color: #7e6363;
+  color: white;
+}
+
+.tabla-ventas td button {
+  background-color: #7e6363;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.tabla-ventas td button:hover {
+  background-color: #644f4f;
+}

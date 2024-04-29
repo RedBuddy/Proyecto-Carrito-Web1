@@ -33,20 +33,23 @@ if (!isset($_SESSION['username'])) {
 <body>
 
     <header class="header">
-        <div class="header-logo">
+        <a class="header-logo" href="productos.php">
             <img src="../img/cafe.webp" alt="cafe logo">
             <h1>Café del bosque</h1>
-        </div>
+        </a>
 
         <div class="header-links">
             <a class="link" href="productos.php">Productos</a>
             <a class="link" href="configuracion.php">Configuracion</a>
             <a class="link seleccionado" href="contacto.php">Contacto</a>
+            <a class="link" href="informes/historialCompras.php">Historial compras</a>
+
             <?php
 
             if (isset($_SESSION['username'])) {
                 if ($_SESSION['username'] == 'admin') {
                     echo "<a class='link' href='gestion_productos/gestion.php'>Gestión de productos</a>";
+                    echo "<a class='link' href='informes/ventas.php'>Informes</a>";
                 }
             }
 
