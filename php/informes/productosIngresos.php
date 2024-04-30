@@ -19,7 +19,7 @@ if ($_SESSION['username'] != 'admin') {
   <title>Página de Gestión de Productos</title>
   <!-- Estilos -->
   <link rel="stylesheet" href="../../css/normalize.css" />
-  <link rel="stylesheet" href="../../css/informes/ventas.css" />
+  <link rel="stylesheet" href="../../css/informes/productosIngresos.css" />
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@ if ($_SESSION['username'] != 'admin') {
   </header>
   <div class="banner">
     <div class="subtitulo">
-      <h2>Informes</h2>
+      <h2>Ventas</h2>
     </div>
   </div>
 
@@ -64,6 +64,36 @@ if ($_SESSION['username'] != 'admin') {
     <button class="link-gestion" onclick="window.location.href='ventasFecha.php'">
       Ventas por día, semana, mes, rango de fecha
     </button>
+  </div>
+
+  <div class="tabla-ventas">
+    <table>
+      <thead>
+        <tr>
+          <th>Imagen del Producto</th>
+          <th>Descripción del Producto</th>
+          <th>Ingresos Generados</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img src="../img/producto1.jpg" alt="Producto 1" /></td>
+          <td>Descripción del Producto 1</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td><img src="../img/producto2.jpg" alt="Producto 2" /></td>
+          <td>Descripción del Producto 2</td>
+          <td>75</td>
+        </tr>
+        <!-- Puedes agregar más filas aquí si es necesario -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="botones-vendidos">
+    <button class="boton-vendidos">Más Ingresos</button>
+    <button class="boton-vendidos">Menos Ingresos</button>
   </div>
 
   <script src="../js/configuracion.js"></script>

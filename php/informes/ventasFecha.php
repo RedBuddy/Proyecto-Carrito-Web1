@@ -19,7 +19,7 @@ if ($_SESSION['username'] != 'admin') {
   <title>Página de Gestión de Productos</title>
   <!-- Estilos -->
   <link rel="stylesheet" href="../../css/normalize.css" />
-  <link rel="stylesheet" href="../../css/informes/ventas.css" />
+  <link rel="stylesheet" href="../../css/informes/ventasFecha.css" />
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@ if ($_SESSION['username'] != 'admin') {
   </header>
   <div class="banner">
     <div class="subtitulo">
-      <h2>Informes</h2>
+      <h2>Ventas</h2>
     </div>
   </div>
 
@@ -66,6 +66,44 @@ if ($_SESSION['username'] != 'admin') {
     </button>
   </div>
 
+  <div class="tabla-ventas">
+    <table>
+      <thead>
+        <tr>
+          <th>Número de Venta</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Total de Venta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">001</td>
+          <td>Producto 1</td>
+          <td>1</td>
+          <td rowspan="2">$50.00</td>
+        </tr>
+        <tr>
+          <td>Producto 2</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>002</td>
+          <td>Producto 3</td>
+          <td>1</td>
+          <td>$30.00</td>
+        </tr>
+        <!-- Puedes agregar más filas aquí si es necesario -->
+      </tbody>
+    </table>
+  </div>
+  <div class="busqueda-ventas">
+    <label for="desde">Desde:</label>
+    <input type="date" id="desde" name="desde" />
+    <label for="hasta">Al:</label>
+    <input type="date" id="hasta" name="hasta" />
+    <button class="boton-buscar">Buscar</button>
+  </div>
   <script src="../js/configuracion.js"></script>
   <script src="../js/productos.js"></script>
 </body>

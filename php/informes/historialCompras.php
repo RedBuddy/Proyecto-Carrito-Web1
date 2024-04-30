@@ -2,9 +2,52 @@
 session_start();
 
 if (!isset($_SESSION['username'])) {
-  header("Location: ../index.php");
+  header("Location: ../../index.php");
 }
+
+// Incluir el archivo de configuración de la base de datos
+require '../../includes/config/database.php';
+
+// Establecer conexión a la base de datos
+$db = conectarBD();
+
+// Obtener el nombre de usuario de la sesión
+$usuario = $_SESSION['username'];
+
+// Consultar el historial de compras del usuario
+$consulta = "SELECT ventas.ID AS NumeroCompra, detalle_venta.Producto, detalle_venta.Cantidad, ventas.Total
+             FROM ventas
+             INNER JOIN detalle_venta ON ventas.ID = detalle_venta.Venta_id
+             WHERE ventas.Usuario = '$usuario'";
+
+$resultado = $db->query($consulta);
+
+// Crear un array para almacenar temporalmente las filas agrupadas por número de compra
+$filas_agrupadas = array();
+
+while ($fila = $resultado->fetch_assoc()) {
+  $numero_compra = $fila['NumeroCompra'];
+
+  // Si aún no existe una fila para el número de compra, crearla
+  if (!isset($filas_agrupadas[$numero_compra])) {
+    $filas_agrupadas[$numero_compra] = array(
+      'numero_compra' => $numero_compra,
+      'productos' => array()
+    );
+  }
+
+  // Agregar el producto a la fila correspondiente
+  $filas_agrupadas[$numero_compra]['productos'][] = array(
+    'producto' => $fila['Producto'],
+    'cantidad' => $fila['Cantidad'],
+    'total' => $fila['Total']
+  );
+}
+
+// Cerrar la conexión a la base de datos
+$db->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,36 +67,16 @@ if (!isset($_SESSION['username'])) {
 
 <body>
   <header class="header">
-    <div class="header-logo">
+    <a class="header-logo" href="../productos.php">
       <img src="../../img/cafe.webp" alt="cafe logo" />
       <h1>Café del bosque</h1>
-    </div>
+    </a>
     <div class="header-links">
-      <a class="link seleccionado" href="productos.php">Productos</a>
-      <a class="link" href="configuracion.php">Configuracion</a>
-      <a class="link" href="contacto.php">Contacto</a>
-      <a class="link" href="informes/historialCompras.php">Historial compras</a>
-      <?php
-
-      if (isset($_SESSION['username'])) {
-        if ($_SESSION['username'] == 'admin') {
-          echo "<a class='link' href='gestion_productos/gestion.php'>Gestión de productos</a>";
-        }
-      }
-
-      if (isset($_SESSION['username'])) {
-        $usuario = $_SESSION['username'];
-        echo "<a class='link' href='editar_usuario.php'>$usuario</a>";
-      } else {
-        echo "<a class='link' href=''>Usuario X</a>";
-      }
-
-      $cantidadProductos = 0;
-      if (isset($_SESSION["carrito"]) && is_array($_SESSION["carrito"])) {
-        $cantidadProductos = count($_SESSION["carrito"]);
-      }
-      echo "<a class='boton btn-carrito' href='carrito.php'>Carrito (<span class='boton-carrito'>{$cantidadProductos}</span>)</a>";
-      ?>
+      <a class="link" href="../productos.php">Inicio</a>
+      <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
+      <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+      <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
+      <a class="link seleccionado" href="ventas.php">Informes</a>
     </div>
   </header>
   <div class="banner">
@@ -73,23 +96,20 @@ if (!isset($_SESSION['username'])) {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td rowspan="2">001</td>
-          <td>Producto 1</td>
-          <td>1</td>
-          <td rowspan="2">$50.00</td>
-        </tr>
-        <tr>
-          <td>Producto 2</td>
-          <td>1</td>
-        </tr>
-        <tr>
-          <td>002</td>
-          <td>Producto 3</td>
-          <td>1</td>
-          <td>$30.00</td>
-        </tr>
-        <!-- Puedes agregar más filas aquí si es necesario -->
+        <?php foreach ($filas_agrupadas as $fila) : ?>
+          <?php foreach ($fila['productos'] as $index => $producto) : ?>
+            <tr>
+              <?php if ($index === 0) : ?>
+                <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo $fila['numero_compra']; ?></td>
+              <?php endif; ?>
+              <td><?php echo $producto['producto']; ?></td>
+              <td><?php echo $producto['cantidad']; ?></td>
+              <?php if ($index === 0) : ?>
+                <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo '$' . $producto['total']; ?></td>
+              <?php endif; ?>
+            </tr>
+          <?php endforeach; ?>
+        <?php endforeach; ?>
       </tbody>
     </table>
   </div>

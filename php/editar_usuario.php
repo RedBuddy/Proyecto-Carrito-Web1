@@ -92,10 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <header class="header">
-        <div class="header-logo">
+        <a class="header-logo" href="productos.php">
             <img src="../img/cafe.webp" alt="cafe logo" />
             <h1>Café del bosque</h1>
-        </div>
+        </a>
         <div class="header-links">
             <a class="link" href="productos.php">Productos</a>
             <a class="link" href="configuracion.php">Configuración</a>

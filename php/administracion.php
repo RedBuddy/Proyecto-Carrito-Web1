@@ -18,8 +18,8 @@ if ($_SESSION['username'] != 'admin') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página de Gestión de Productos</title>
     <!-- Estilos -->
-    <link rel="stylesheet" href="../../css/normalize.css" />
-    <link rel="stylesheet" href="../../css/gestion.css" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/gestion.css" />
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,27 +29,28 @@ if ($_SESSION['username'] != 'admin') {
 
 <body>
     <header class="header">
-        <a class="header-logo" href="../productos.php">
-            <img src="../../img/cafe.webp" alt="cafe logo" />
+        <a class="header-logo" href="productos.php">
+            <img src="../img/cafe.webp" alt="cafe logo" />
             <h1>Café del bosque</h1>
         </a>
         <div class="header-links">
-            <a class="link" href="../productos.php">Inicio</a>
-            <a class="link seleccionado" href="gestion.php">Gestión de productos</a>
-            <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
-            <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
-            <a class="link" href="../informes/ventas.php">Informes</a>
+            <a class="link" href="productos.php">Productos</a>
+            <a class="link" href="configuracion.php">Configuración</a>
+            <a class="link" href="contacto.php">Contacto</a>
+            <a class="link" href="informes/historialCompras.php">Historial compras</a>
+            <a class='link seleccionado' href='administracion.php'>Administración</a>
         </div>
     </header>
     <div class="banner">
         <div class="subtitulo">
-            <h2>Gestión de productos</h2>
+            <h2>Menú de administración</h2>
         </div>
         <div class="gestion-links-cont">
             <div class="gestion-links">
-                <a class="link-gestion" href="agregar_producto.php">Agregar producto</a>
-                <a class="link-gestion" href="baja_producto.php">Alta/Baja producto</a>
-                <a class="link-gestion" href="modificar_producto.php">Modificar producto</a>
+                <a class="link-gestion" href="gestion_productos/gestion.php">Gestión de productos</a>
+                <a class="link-gestion" href="gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+                <a class="link-gestion" href="mensajes_contacto/notificaciones.php">Notificaciones</a>
+                <a class="link-gestion" href="informes/ventas.php">Informes</a>
             </div>
         </div>
     </div>

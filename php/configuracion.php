@@ -47,8 +47,7 @@ if (!isset($_SESSION['username'])) {
 
       if (isset($_SESSION['username'])) {
         if ($_SESSION['username'] == 'admin') {
-          echo "<a class='link' href='gestion_productos/gestion.php'>Gestión de productos</a>";
-          echo "<a class='link' href='informes/ventas.php'>Informes</a>";
+          echo "<a class='link' href='administracion.php'>Administración</a>";
         }
       }
 

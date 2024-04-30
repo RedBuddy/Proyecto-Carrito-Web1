@@ -13,22 +13,26 @@ require '../../includes/config/database.php';
 $db = conectarBD();
 
 // Consulta a la base de datos
-$query = "SELECT ID, Nombre, Precio, Imagen, Activo FROM productos";
+$query = "SELECT ID, Nombre, Edad, Email, Usuario, Contrasena, Verificado, Activo FROM usuarios WHERE Usuario != 'admin'";
 $res = mysqli_query($db, $query);
 
-$productos = [];
+$usuarios = [];
 
 if ($res->num_rows > 0) {
     // Almacenar los datos en un array
     while ($row = $res->fetch_assoc()) {
-        $producto = [
+        $usuario = [
             'id' => $row['ID'],
             'nombre' => $row['Nombre'],
-            'precio' => $row['Precio'],
-            'imagen' => $row['Imagen'],
+            'edad' => $row['Edad'],
+            'email' => $row['Email'],
+            'usuario' => $row['Usuario'],
+            'contrasena' => $row['Contrasena'],
+            'verificado' => $row['Verificado'],
             'activo' => $row['Activo']
+
         ];
-        array_push($productos, $producto);
+        array_push($usuarios, $usuario);
     }
 }
 
@@ -42,7 +46,7 @@ mysqli_close($db);
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página de Gestión de Productos</title>
+    <title>Página de Gestión de Usuarios</title>
     <!-- Estilos -->
     <link rel="stylesheet" href="../../css/normalize.css" />
     <link rel="stylesheet" href="../../css/gestion.css" />
@@ -61,43 +65,54 @@ mysqli_close($db);
         </a>
         <div class="header-links">
             <a class="link" href="../productos.php">Inicio</a>
-            <a class="link seleccionado" href="gestion.php">Gestión de productos</a>
-            <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+            <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
+            <a class="link seleccionado" href="gestion_usuarios.php">Gestión de usuarios</a>
             <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
             <a class="link" href="../informes/ventas.php">Informes</a>
         </div>
     </header>
     <div class="banner">
         <div class="subtitulo">
-            <h2>Gestión de productos</h2>
+            <h2>Gestión de usuarios</h2>
         </div>
-        <div class="gestion-links-cont">
+        <!-- <div class="gestion-links-cont">
             <div class="gestion-links">
-                <a class="link-gestion" href="agregar_producto.php">Agregar producto</a>
-                <a class="link-gestion" href="baja_producto.php">Alta/Baja producto</a>
-                <a class="link-gestion" href="modificar_producto.php">Modificar producto</a>
+                <a class="link-gestion" href="baja_usuario.php">Alta/Baja usuario</a>
+                <a class="link-gestion" href="modificar_usuario.php">Modificar usuario</a>
             </div>
-        </div>
+        </div> -->
     </div>
+
+    <?php if (isset($_SESSION['usuario_actualizado'])) {
+        echo "<p id='alerta_verde'>{$_SESSION['usuario_actualizado']}</p>";
+        unset($_SESSION['usuario_actualizado']);
+    } ?>
+
+    <?php if (isset($_SESSION['usuario_error'])) {
+        echo "<p id='alerta_roja'>{$_SESSION['usuario_error']}</p>";
+        unset($_SESSION['usuario_error']);
+    } ?>
 
     <!-- Barra de búsqueda -->
     <form class="search-bar">
-        <input type="text" id="filtro" placeholder="Buscar producto..." />
+        <input type="text" id="filtro" placeholder="Buscar por nombre de usuario..." />
         <button type="submit">Borrar</button>
     </form>
 
     <div class="lista-productos" id="lista-productos">
-        <?php foreach ($productos as $producto) : ?>
-            <div class="product-item" data-nombre="<?php echo strtolower($producto['nombre']); ?>">
-                <img src="../<?php echo $producto['imagen']; ?>" alt="<?php echo $producto['nombre']; ?>" />
+        <?php foreach ($usuarios as $usuario) : ?>
+            <div class="product-item" data-nombre="<?php echo strtolower($usuario['usuario']); ?>">
                 <div class="product-item-details">
-                    <h3><?php echo $producto['nombre']; ?></h3>
-                    <p>Precio: $<?php echo $producto['precio']; ?></p>
-                    <?php if ($producto['activo']) : ?>
-                        <button class="deactivate-button" data-id="<?php echo $producto['id']; ?>">Desactivar</button>
+                    <h3><?php echo $usuario['usuario']; ?></h3>
+                    <p>Nombre: <?php echo $usuario['nombre']; ?></p>
+                    <p>Edad: <?php echo $usuario['edad']; ?></p>
+                    <p>Email: <?php echo $usuario['email']; ?></p>
+                    <?php if ($usuario['activo']) : ?>
+                        <button class="deactivate-button" data-id="<?php echo $usuario['id']; ?>">Desactivar</button>
                     <?php else : ?>
-                        <button class="activate-button" data-id="<?php echo $producto['id']; ?>">Activar</button>
+                        <button class="activate-button" data-id="<?php echo $usuario['id']; ?>">Activar</button>
                     <?php endif; ?>
+                    <a class="edit-button" href="editar_usuario.php?id=<?php echo $usuario['id']; ?>">Modificar</a> <!-- Enlace de modificar -->
                 </div>
             </div>
         <?php endforeach; ?>
@@ -123,12 +138,12 @@ mysqli_close($db);
             // Escuchar clics en los botones de desactivar y activar
             document.querySelectorAll('.deactivate-button, .activate-button').forEach(function(button) {
                 button.addEventListener('click', function() {
-                    var id_producto = this.getAttribute('data-id');
+                    var id_usuario = this.getAttribute('data-id');
                     var nuevo_estado = this.classList.contains('deactivate-button') ? 0 : 1;
 
                     // Enviar una solicitud AJAX al servidor
                     var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'actualizar_estado_producto.php', true);
+                    xhr.open('POST', 'actualizar_estado_usuario.php', true);
                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
@@ -145,11 +160,11 @@ mysqli_close($db);
                                     button.textContent = 'Desactivar';
                                 }
                             } else {
-                                alert('Error al actualizar el estado del producto');
+                                alert('Error al actualizar el estado del usuario');
                             }
                         }
                     };
-                    xhr.send('id_producto=' + id_producto + '&nuevo_estado=' + nuevo_estado);
+                    xhr.send('id_usuario=' + id_usuario + '&nuevo_estado=' + nuevo_estado);
                 });
             });
         });

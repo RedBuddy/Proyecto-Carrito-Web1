@@ -61,12 +61,11 @@ mysqli_close($db);
             <h1>Café del bosque</h1>
         </a>
         <div class="header-links">
-            <a class="link" href="../productos.php">Productos</a>
-            <a class="link" href="../configuracion.php">Configuración</a>
-            <a class="link" href="../contacto.php">Contacto</a>
-            <a class="link" href="../informes/historialCompras.php">Historial compras</a>
+            <a class="link" href="../productos.php">Inicio</a>
             <a class="link seleccionado" href="gestion.php">Gestión de productos</a>
-            <a class='link' href='../informes/ventas.php'>Informes</a>
+            <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+            <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
+            <a class="link" href="../informes/ventas.php">Informes</a>
         </div>
     </header>
     <div class="banner">

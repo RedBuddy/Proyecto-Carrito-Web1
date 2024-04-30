@@ -19,7 +19,7 @@ if ($_SESSION['username'] != 'admin') {
   <title>Página de Gestión de Productos</title>
   <!-- Estilos -->
   <link rel="stylesheet" href="../../css/normalize.css" />
-  <link rel="stylesheet" href="../../css/informes/ventas.css" />
+  <link rel="stylesheet" href="../../css/informes/clientesCompras.css" />
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,11 +43,10 @@ if ($_SESSION['username'] != 'admin') {
   </header>
   <div class="banner">
     <div class="subtitulo">
-      <h2>Informes</h2>
+      <h2>Ventas</h2>
     </div>
   </div>
 
-  <!-- Botones de gestión -->
   <div class="gestion-buttons">
     <button class="link-gestion" onclick="window.location.href='ventasCantidad.php'">
       Productos vendidos por cantidad
@@ -64,6 +63,26 @@ if ($_SESSION['username'] != 'admin') {
     <button class="link-gestion" onclick="window.location.href='ventasFecha.php'">
       Ventas por día, semana, mes, rango de fecha
     </button>
+  </div>
+  <div class="tabla-ventas">
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre de Usuario</th>
+          <th>Compras Realizadas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NombreUsuario1</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td>NombreUsuario2</td>
+          <td>75</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <script src="../js/configuracion.js"></script>
