@@ -11,12 +11,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contrasena = $_POST['password'];
 
         // Obtener la contraseña almacenada en la base de datos para el usuario
-        $query = "SELECT Contrasena, Verificado, Email FROM usuarios WHERE Usuario = '$usuario'";
+        $query = "SELECT Contrasena, Verificado, Activo, Email FROM usuarios WHERE Usuario = '$usuario'";
         $result = mysqli_query($db, $query);
         $row = mysqli_fetch_assoc($result);
         $contrasena_hash = $row['Contrasena'];
         $email = $row['Email'];
         $verificado = $row['Verificado'];
+        $activo = $row['Activo'];
+
+        if ($activo == 0) {
+            $_SESSION["error"] = "Error! Usuario inactivo.";
+            mysqli_close($db);
+            header("Location: ../index.php");
+            exit;
+        }
 
         if ($verificado == 1) {
             if (password_verify($contrasena, $contrasena_hash)) {

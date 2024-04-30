@@ -81,6 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["enviar_email"])) {
     <div class="header-links">
       <a class="link" href="../productos.php">Inicio</a>
       <a class="link" href="gestion.php">Gestión de productos</a>
+      <a class="link" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
       <a class="link seleccionado" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
       <a class="link" href="../informes/ventas.php">Informes</a>
     </div>

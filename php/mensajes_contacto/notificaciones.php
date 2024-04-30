@@ -28,7 +28,7 @@ if (isset($_POST['eliminar_mensaje'])) {
 
 
 // Consulta a la base de datos
-$condicion = "";
+$condicion = "WHERE Visto = 0";
 if (isset($_POST['mostrar_leidos'])) {
   $condicion = "WHERE Visto = 1";
 } elseif (isset($_POST['mostrar_no_leidos'])) {
@@ -85,6 +85,7 @@ mysqli_close($db);
       <a class="link" href="../productos.php">Inicio</a>
       <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
       <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+      <a class="link" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
       <a class="link seleccionado" href="notificaciones.php">Notificaciones</a>
       <a class="link" href="../informes/ventas.php">Informes</a>
     </div>

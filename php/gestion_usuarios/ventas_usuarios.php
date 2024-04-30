@@ -13,7 +13,7 @@ require '../../includes/config/database.php';
 $db = conectarBD();
 
 // Consulta a la base de datos
-$query = "SELECT ID, Nombre, Edad, Email, Usuario, Contrasena, Verificado, Activo FROM usuarios WHERE Usuario != 'admin'";
+$query = "SELECT ID, Nombre, Edad, Email, Usuario, Contrasena, Verificado, Activo FROM usuarios";
 $res = mysqli_query($db, $query);
 
 $usuarios = [];
@@ -66,15 +66,15 @@ mysqli_close($db);
         <div class="header-links">
             <a class="link" href="../productos.php">Inicio</a>
             <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
-            <a class="link seleccionado" href="gestion_usuarios.php">Gestión de usuarios</a>
-            <a class="link" href="ventas_usuarios.php">Ventas por usuario</a>
+            <a class="link" href="gestion_usuarios.php">Gestión de usuarios</a>
+            <a class="link seleccionado" href="ventas_usuarios.php">Ventas por usuario</a>
             <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
             <a class="link" href="../informes/ventas.php">Informes</a>
         </div>
     </header>
     <div class="banner">
         <div class="subtitulo">
-            <h2>Gestión de usuarios</h2>
+            <h2>Historial de ventas por usuario</h2>
         </div>
         <!-- <div class="gestion-links-cont">
             <div class="gestion-links">
@@ -96,7 +96,7 @@ mysqli_close($db);
 
     <!-- Barra de búsqueda -->
     <form class="search-bar">
-        <input type="text" id="filtro" placeholder="Buscar por nombre de usuario..." />
+        <input type="text" id="filtro" placeholder="Buscar el usuario..." />
         <button type="submit">Borrar</button>
     </form>
 
@@ -108,12 +108,7 @@ mysqli_close($db);
                     <p>Nombre: <?php echo $usuario['nombre']; ?></p>
                     <p>Edad: <?php echo $usuario['edad']; ?></p>
                     <p>Email: <?php echo $usuario['email']; ?></p>
-                    <?php if ($usuario['activo']) : ?>
-                        <button class="deactivate-button" data-id="<?php echo $usuario['id']; ?>">Desactivar</button>
-                    <?php else : ?>
-                        <button class="activate-button" data-id="<?php echo $usuario['id']; ?>">Activar</button>
-                    <?php endif; ?>
-                    <a class="edit-button" href="editar_usuario.php?id=<?php echo $usuario['id']; ?>">Modificar</a> <!-- Enlace de modificar -->
+                    <a class="edit-button" href="historial_usuario.php?id=<?php echo $usuario['usuario']; ?>">Ver historial</a> <!-- Enlace de modificar -->
                 </div>
             </div>
         <?php endforeach; ?>

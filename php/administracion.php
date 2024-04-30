@@ -49,6 +49,7 @@ if ($_SESSION['username'] != 'admin') {
             <div class="gestion-links">
                 <a class="link-gestion" href="gestion_productos/gestion.php">Gestión de productos</a>
                 <a class="link-gestion" href="gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+                <a class="link-gestion" href="gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
                 <a class="link-gestion" href="mensajes_contacto/notificaciones.php">Notificaciones</a>
                 <a class="link-gestion" href="informes/ventas.php">Informes</a>
             </div>

@@ -9,7 +9,71 @@ if ($_SESSION['username'] != 'admin') {
   header("Location: ../productos.php");
 }
 
+// Incluir el archivo de configuración de la base de datos
+require '../../includes/config/database.php';
+
+// Establecer conexión a la base de datos
+$db = conectarBD();
+
+// Obtener las fechas desde el formulario
+if (!isset($_GET['desde']) && !isset($_GET['hasta'])) {
+  $desde = 0;
+  $hasta = 0;
+} else {
+  $desde = $_GET['desde'];
+  $hasta = $_GET['hasta'];
+}
+
+// Consultar las ventas por rango de fecha
+$consulta_ventas = "SELECT ventas.ID AS NumeroVenta, detalle_venta.Producto, detalle_venta.Cantidad, ventas.Total, ventas.Usuario
+                    FROM ventas
+                    INNER JOIN detalle_venta ON ventas.ID = detalle_venta.Venta_id
+                    WHERE ventas.Fecha BETWEEN '$desde' AND '$hasta'";
+$resultado_ventas = $db->query($consulta_ventas);
+
+// Crear un array para almacenar temporalmente las filas agrupadas por número de venta
+$filas_agrupadas = array();
+
+while ($fila = $resultado_ventas->fetch_assoc()) {
+  $numero_venta = $fila['NumeroVenta'];
+
+  // Si aún no existe una fila para el número de venta, crearla
+  if (!isset($filas_agrupadas[$numero_venta])) {
+    $filas_agrupadas[$numero_venta] = array(
+      'numero_venta' => $numero_venta,
+      'productos' => array()
+    );
+  }
+
+  // Agregar el producto a la fila correspondiente
+  $filas_agrupadas[$numero_venta]['productos'][] = array(
+    'producto' => $fila['Producto'],
+    'cantidad' => $fila['Cantidad'],
+    'total' => $fila['Total'],
+    'usuario' => $fila['Usuario']
+  );
+}
+
+// Definir el número de elementos por página
+$elementos_por_pagina = 10;
+
+// Calcular el número total de páginas
+$total_paginas = ceil(count($filas_agrupadas) / $elementos_por_pagina);
+
+// Obtener el número de página actual
+$pagina_actual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+
+// Calcular el índice de inicio y fin para la página actual
+$indice_inicio = ($pagina_actual - 1) * $elementos_por_pagina;
+$indice_fin = $indice_inicio + $elementos_por_pagina;
+
+// Filtrar las filas agrupadas para la página actual
+$filas_pagina = array_slice($filas_agrupadas, $indice_inicio, $elementos_por_pagina);
+
+// Cerrar la conexión a la base de datos
+$db->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -37,6 +101,7 @@ if ($_SESSION['username'] != 'admin') {
       <a class="link" href="../productos.php">Inicio</a>
       <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
       <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+      <a class="link" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
       <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
       <a class="link seleccionado" href="ventas.php">Informes</a>
     </div>
@@ -66,44 +131,61 @@ if ($_SESSION['username'] != 'admin') {
     </button>
   </div>
 
-  <div class="tabla-ventas">
-    <table>
-      <thead>
-        <tr>
-          <th>Número de Venta</th>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Total de Venta</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td rowspan="2">001</td>
-          <td>Producto 1</td>
-          <td>1</td>
-          <td rowspan="2">$50.00</td>
-        </tr>
-        <tr>
-          <td>Producto 2</td>
-          <td>1</td>
-        </tr>
-        <tr>
-          <td>002</td>
-          <td>Producto 3</td>
-          <td>1</td>
-          <td>$30.00</td>
-        </tr>
-        <!-- Puedes agregar más filas aquí si es necesario -->
-      </tbody>
-    </table>
-  </div>
   <div class="busqueda-ventas">
-    <label for="desde">Desde:</label>
-    <input type="date" id="desde" name="desde" />
-    <label for="hasta">Al:</label>
-    <input type="date" id="hasta" name="hasta" />
-    <button class="boton-buscar">Buscar</button>
+    <form action="ventasFecha.php" method="GET">
+      <label for="desde">Desde:</label>
+      <input type="date" id="desde" name="desde" value="<?php echo $desde; ?>" />
+      <label for="hasta">Al:</label>
+      <input type="date" id="hasta" name="hasta" value="<?php echo $hasta; ?>" />
+      <button type="submit" class="boton-buscar">Buscar</button>
+    </form>
   </div>
+
+  <div class="paginacion">
+    <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+      <?php if ($i == $pagina_actual) : ?>
+        <a class="pagina-actual"><?php echo $i; ?></a>
+      <?php else : ?>
+        <a href="?pagina=<?php echo $i; ?>&desde=<?php echo $desde; ?>&hasta=<?php echo $hasta; ?>"><?php echo $i; ?></a>
+      <?php endif; ?>
+    <?php endfor; ?>
+  </div>
+
+  <?php if (isset($filas_pagina)) : ?>
+    <div class="tabla-ventas">
+      <table>
+        <thead>
+          <tr>
+            <th>Número de Venta</th>
+            <th>Usuario</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Total de Venta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($filas_pagina as $fila) : ?>
+            <?php foreach ($fila['productos'] as $index => $producto) : ?>
+              <tr>
+                <?php if ($index === 0) : ?>
+                  <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo $fila['numero_venta']; ?></td>
+                  <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo $producto['usuario']; ?></td>
+                <?php endif; ?>
+                <td><?php echo $producto['producto']; ?></td>
+                <td><?php echo $producto['cantidad']; ?></td>
+                <?php if ($index === 0) : ?>
+                  <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo '$' . $producto['total']; ?></td>
+                <?php endif; ?>
+              </tr>
+            <?php endforeach; ?>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  <?php else : ?>
+    <p>No hay resultados para mostrar.</p>
+  <?php endif; ?>
+
   <script src="../js/configuracion.js"></script>
   <script src="../js/productos.js"></script>
 </body>

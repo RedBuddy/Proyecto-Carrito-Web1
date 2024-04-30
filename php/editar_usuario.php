@@ -100,10 +100,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a class="link" href="productos.php">Productos</a>
             <a class="link" href="configuracion.php">Configuración</a>
             <a class="link" href="contacto.php">Contacto</a>
+            <a class="link" href="informes/historialCompras.php">Historial compras</a>
+
             <?php
             if (isset($_SESSION['username'])) {
                 if ($_SESSION['username'] == 'admin') {
-                    echo "<a class='link' href='gestion_productos/gestion.php'>Gestión de productos</a>";
+                    echo "<a class='link' href='administracion.php'>Administración</a>";
                 }
             }
             ?>

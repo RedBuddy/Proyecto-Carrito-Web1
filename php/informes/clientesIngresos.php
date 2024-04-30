@@ -9,7 +9,46 @@ if ($_SESSION['username'] != 'admin') {
   header("Location: ../productos.php");
 }
 
+// Incluir el archivo de configuración de la base de datos
+require '../../includes/config/database.php';
+
+// Establecer conexión a la base de datos
+$db = conectarBD();
+
+// Definir la cantidad de resultados por página
+$resultados_por_pagina = 10;
+
+// Determinar la página actual
+$pagina_actual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+
+// Calcular el inicio del conjunto de resultados
+$inicio = ($pagina_actual - 1) * $resultados_por_pagina;
+
+// Determinar el tipo de ordenamiento
+$ordenamiento = isset($_GET['orden']) ? $_GET['orden'] : 'desc';
+$orden = ($ordenamiento == 'asc') ? 'ASC' : 'DESC';
+
+// Consultar los clientes que generan más ingresos
+$consulta_clientes = "SELECT ventas.Usuario, SUM(detalle_venta.Subtotal) AS IngresosGenerados
+                       FROM ventas
+                       INNER JOIN detalle_venta ON ventas.ID = detalle_venta.Venta_id
+                       GROUP BY ventas.Usuario
+                       ORDER BY IngresosGenerados $orden
+                       LIMIT $inicio, $resultados_por_pagina";
+$resultado_clientes = $db->query($consulta_clientes);
+
+// Consultar la cantidad total de clientes
+$consulta_total = "SELECT COUNT(DISTINCT Usuario) AS Total FROM ventas";
+$resultado_total = $db->query($consulta_total);
+$total_clientes = $resultado_total->fetch_assoc()['Total'];
+
+// Calcular la cantidad total de páginas
+$total_paginas = ceil($total_clientes / $resultados_por_pagina);
+
+// Cerrar la conexión a la base de datos
+$db->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -37,6 +76,7 @@ if ($_SESSION['username'] != 'admin') {
       <a class="link" href="../productos.php">Inicio</a>
       <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
       <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+      <a class="link" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
       <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
       <a class="link seleccionado" href="ventas.php">Informes</a>
     </div>
@@ -47,6 +87,7 @@ if ($_SESSION['username'] != 'admin') {
     </div>
   </div>
 
+  <!-- Botones de gestión -->
   <div class="gestion-buttons">
     <button class="link-gestion" onclick="window.location.href='ventasCantidad.php'">
       Productos vendidos por cantidad
@@ -64,6 +105,29 @@ if ($_SESSION['username'] != 'admin') {
       Ventas por día, semana, mes, rango de fecha
     </button>
   </div>
+
+  <div class="alinear">
+    <!-- Paginación -->
+    <div class="paginacion">
+      <?php if ($total_paginas > 1) : ?>
+        <?php if ($pagina_actual > 1) : ?>
+          <a href="clientesIngresos.php?orden=<?php echo $ordenamiento; ?>&pagina=<?php echo $pagina_actual - 1; ?>" class="boton-paginacion">&lt;</a>
+        <?php endif; ?>
+        <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+          <a href="clientesIngresos.php?orden=<?php echo $ordenamiento; ?>&pagina=<?php echo $i; ?>" class="boton-paginacion <?php echo ($i == $pagina_actual) ? 'activo' : ''; ?>"><?php echo $i; ?></a>
+        <?php endfor; ?>
+        <?php if ($pagina_actual < $total_paginas) : ?>
+          <a href="clientesIngresos.php?orden=<?php echo $ordenamiento; ?>&pagina=<?php echo $pagina_actual + 1; ?>" class="boton-paginacion">&gt;</a>
+        <?php endif; ?>
+      <?php endif; ?>
+    </div>
+
+    <div class="botones-vendidos">
+      <button class="boton-vendidos" onclick="window.location.href='clientesIngresos.php?orden=desc'">Más Ingresos</button>
+      <button class="boton-vendidos" onclick="window.location.href='clientesIngresos.php?orden=asc'">Menos Ingresos</button>
+    </div>
+  </div>
+
   <div class="tabla-ventas">
     <table>
       <thead>
@@ -73,14 +137,12 @@ if ($_SESSION['username'] != 'admin') {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>NombreUsuario1</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <td>NombreUsuario2</td>
-          <td>75</td>
-        </tr>
+        <?php while ($fila = $resultado_clientes->fetch_assoc()) : ?>
+          <tr>
+            <td><?php echo $fila['Usuario']; ?></td>
+            <td><?php echo $fila['IngresosGenerados']; ?></td>
+          </tr>
+        <?php endwhile; ?>
       </tbody>
     </table>
   </div>

@@ -63,6 +63,7 @@ mysqli_close($db);
             <a class="link" href="../productos.php">Inicio</a>
             <a class="link seleccionado" href="gestion.php">Gestión de productos</a>
             <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+            <a class="link" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
             <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
             <a class="link" href="../informes/ventas.php">Informes</a>
         </div>
