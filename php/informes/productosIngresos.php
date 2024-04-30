@@ -140,7 +140,7 @@ $db->close();
       <tbody>
         <?php while ($fila = $resultado_productos->fetch_assoc()) : ?>
           <tr>
-            <td><img src="../../<?php echo $fila['Imagen']; ?>" alt="<?php echo $fila['Producto']; ?>" /></td>
+            <td><img src="../<?php echo $fila['Imagen']; ?>" alt="<?php echo $fila['Producto']; ?>" /></td>
             <td><?php echo $fila['Producto']; ?></td>
             <td><?php echo $fila['IngresosGenerados']; ?></td>
           </tr>
