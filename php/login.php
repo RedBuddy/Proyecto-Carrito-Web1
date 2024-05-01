@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $activo = $row['Activo'];
 
         if ($activo == 0) {
-            $_SESSION["error"] = "Error! Usuario inactivo.";
+            $_SESSION["error"] = "Error! Usuario inactivo o inexistente.";
             mysqli_close($db);
             header("Location: ../index.php");
             exit;

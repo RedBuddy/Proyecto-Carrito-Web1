@@ -46,7 +46,6 @@ $total_clientes = $resultado_total->fetch_assoc()['Total'];
 $total_paginas = ceil($total_clientes / $resultados_por_pagina);
 
 // Cerrar la conexión a la base de datos
-$db->close();
 ?>
 
 <!DOCTYPE html>
@@ -123,12 +122,14 @@ $db->close();
     </div>
 
     <div class="botones-vendidos">
+      <button id="mostrarTabla" class="boton-vendidos" onclick="mostrarTabla()">Mostrar Tabla</button>
+      <button id="mostrarGrafica" class="boton-vendidos" onclick="mostrarGrafica()">Mostrar Gráfica</button>
       <button class="boton-vendidos" onclick="window.location.href='clientesCompras.php?orden=desc'">Más Compras</button>
       <button class="boton-vendidos" onclick="window.location.href='clientesCompras.php?orden=asc'">Menos Compras</button>
     </div>
   </div>
 
-  <div class="tabla-ventas">
+  <div class="tabla-ventas" id="tablaVentas">
     <table>
       <thead>
         <tr>
@@ -146,6 +147,77 @@ $db->close();
       </tbody>
     </table>
   </div>
+
+  <div class="div-grafica" id="divGrafica" style="display: none;">
+    <div class="grafica-container">
+      <canvas id="graficaClientesCompras"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    function mostrarTabla() {
+      document.getElementById('tablaVentas').style.display = 'block';
+      document.getElementById('divGrafica').style.display = 'none';
+    }
+
+    function mostrarGrafica() {
+      document.getElementById('tablaVentas').style.display = 'none';
+      document.getElementById('divGrafica').style.display = 'flex';
+    }
+    // Obtener los datos de los clientes que compran más productos
+    let clientesMasCompras = [
+      <?php
+      $consulta_clientes_mas_compras = "SELECT ventas.Usuario, COUNT(detalle_venta.ID) AS ComprasRealizadas
+                                      FROM ventas
+                                      INNER JOIN detalle_venta ON ventas.ID = detalle_venta.Venta_id
+                                      GROUP BY ventas.Usuario
+                                      ORDER BY ComprasRealizadas DESC
+                                      LIMIT 5";
+      $resultado_clientes_mas_compras = $db->query($consulta_clientes_mas_compras);
+
+      $colores = ["#010d23", "#03223f", "#038bbb", "#fccb6f", "#e19f41"];
+      $index_color = 0;
+
+      while ($fila = $resultado_clientes_mas_compras->fetch_assoc()) {
+        echo "{ cliente: '" . $fila['Usuario'] . "', compras: " . $fila['ComprasRealizadas'] . ", color: '" . $colores[$index_color] . "' },";
+        $index_color++;
+        if ($index_color >= count($colores)) {
+          $index_color = 0; // Reiniciar el índice si se alcanza el final del array de colores
+        }
+      }
+      ?>
+    ];
+
+    // Configurar los datos para la gráfica
+    let labels = clientesMasCompras.map(cliente => cliente.cliente);
+    let data = clientesMasCompras.map(cliente => cliente.compras);
+    let backgroundColors = clientesMasCompras.map(cliente => cliente.color);
+
+    let graficaClientesCompras = document.getElementById('graficaClientesCompras').getContext('2d');
+    let chart = new Chart(graficaClientesCompras, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Clientes que compran más productos',
+          data: data,
+          backgroundColor: backgroundColors,
+          borderColor: backgroundColors,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+  <?php $db->close(); ?>
 
   <script src="../js/configuracion.js"></script>
   <script src="../js/productos.js"></script>

@@ -23,6 +23,12 @@ session_start();
 </head>
 
 <body>
+    <?php
+    if (isset($_SESSION["email_verificado"])) {
+        echo "<p id='alerta_verde'>{$_SESSION["email_verificado"]}</p>";
+        unset($_SESSION["email_verificado"]);
+    }
+    ?>
     <section class="contenedor-sesion">
         <form class="contenedor-sesion-panel" action="php/login.php" method="post">
             <div class="sesion-icono">

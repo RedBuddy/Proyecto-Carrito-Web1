@@ -75,7 +75,7 @@ $db->close();
       <a class="link" href="../productos.php">Productos</a>
       <a class="link" href="../configuracion.php">Configuración</a>
       <a class="link" href="../contacto.php">Contacto</a>
-      <a class="link" href="historialCompras.php">Historial compras</a>
+      <a class="link seleccionado" href="historialCompras.php">Historial compras</a>
 
       <?php
       if (isset($_SESSION['username'])) {
@@ -84,7 +84,7 @@ $db->close();
         }
       }
       ?>
-      <a class="link seleccionado" href="../gestion_usuarios/editar_usuario.php">Editar Perfil</a>
+      <a class="link" href="../gestion_usuarios/editar_usuario.php">Editar Perfil</a>
     </div>
   </header>
   <div class="banner">

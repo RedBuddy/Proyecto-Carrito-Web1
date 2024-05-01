@@ -78,9 +78,10 @@ body {
 }
 
 .gestion-buttons {
+    background-color: #ACA885;
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .link-gestion {

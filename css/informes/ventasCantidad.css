@@ -79,9 +79,10 @@
  }
 
  .gestion-buttons {
+   background-color: #ACA885;
    display: flex;
    justify-content: center;
-   margin-top: 2rem;
+   padding-bottom: 2rem;
  }
 
  .link-gestion {
@@ -192,4 +193,19 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
+ }
+
+ .div-grafica {
+   margin: 2rem;
+   display: flex;
+   justify-content: center;
+ }
+
+ .grafica-container {
+   background-color: white;
+   width: 60rem;
+   border-radius: .3rem;
+   padding: 1.5rem;
+
+   color: #5d5478;
  }

@@ -46,7 +46,7 @@ $total_productos = $resultado_total->fetch_assoc()['Total'];
 $total_paginas = ceil($total_productos / $resultados_por_pagina);
 
 // Cerrar la conexión a la base de datos
-$db->close();
+// $db->close();
 ?>
 
 <!DOCTYPE html>
@@ -123,12 +123,14 @@ $db->close();
     </div>
 
     <div class="botones-vendidos">
+      <button id="mostrarTabla" class="boton-vendidos" onclick="mostrarTabla()">Mostrar Tabla</button>
+      <button id="mostrarGrafica" class="boton-vendidos" onclick="mostrarGrafica()">Mostrar Gráfica</button>
       <button class="boton-vendidos" onclick="window.location.href='productosIngresos.php?orden=desc'">Más Ingresos</button>
       <button class="boton-vendidos" onclick="window.location.href='productosIngresos.php?orden=asc'">Menos Ingresos</button>
     </div>
   </div>
 
-  <div class="tabla-ventas">
+  <div class="tabla-ventas" id="tablaVentas">
     <table>
       <thead>
         <tr>
@@ -148,6 +150,77 @@ $db->close();
       </tbody>
     </table>
   </div>
+
+  <div class="div-grafica" id="divGrafica" style="display: none;">
+    <div class="grafica-container">
+      <canvas id="graficaProductosIngresos"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    function mostrarTabla() {
+      document.getElementById('tablaVentas').style.display = 'block';
+      document.getElementById('divGrafica').style.display = 'none';
+    }
+
+    function mostrarGrafica() {
+      document.getElementById('tablaVentas').style.display = 'none';
+      document.getElementById('divGrafica').style.display = 'flex';
+    }
+    // Obtener los datos de los productos que generan más ingresos
+    let productosMasIngresos = [
+      <?php
+      $consulta_productos_mas_ingresos = "SELECT Producto, SUM(Cantidad * Precio) AS IngresosGenerados
+                                        FROM detalle_venta
+                                        INNER JOIN productos ON detalle_venta.Producto = productos.Nombre
+                                        GROUP BY Producto
+                                        ORDER BY IngresosGenerados DESC
+                                        LIMIT 5";
+      $resultado_productos_mas_ingresos = $db->query($consulta_productos_mas_ingresos);
+
+      $colores = ["#010d23", "#03223f", "#038bbb", "#fccb6f", "#e19f41"];
+      $index_color = 0;
+
+      while ($fila = $resultado_productos_mas_ingresos->fetch_assoc()) {
+        echo "{ producto: '" . $fila['Producto'] . "', ingresos: " . $fila['IngresosGenerados'] . ", color: '" . $colores[$index_color] . "' },";
+        $index_color++;
+        if ($index_color >= count($colores)) {
+          $index_color = 0; // Reiniciar el índice si se alcanza el final del array de colores
+        }
+      }
+      ?>
+    ];
+
+    // Configurar los datos para la gráfica
+    let labels = productosMasIngresos.map(producto => producto.producto);
+    let data = productosMasIngresos.map(producto => producto.ingresos);
+    let backgroundColors = productosMasIngresos.map(producto => producto.color);
+
+    let graficaProductosIngresos = document.getElementById('graficaProductosIngresos').getContext('2d');
+    let chart = new Chart(graficaProductosIngresos, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Productos Más Ingresos',
+          data: data,
+          backgroundColor: backgroundColors,
+          borderColor: backgroundColors,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+  <?php $db->close(); ?>
 
 
   <script src="../js/configuracion.js"></script>
