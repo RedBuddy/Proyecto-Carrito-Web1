@@ -79,7 +79,7 @@ body {
 
 .tabla-ventas {
     margin: 20px auto;
-    max-width: 900px;
+    max-width: 70%;
     background-color: #f3f3f3;
     border-radius: 10px;
     overflow: hidden;
@@ -115,4 +115,25 @@ body {
 
 .tabla-ventas td button:hover {
     background-color: #644f4f;
+}
+
+.paginacion {
+    margin: 2rem 0 0 2rem;
+    display: flex;
+    /* gap: .5rem; */
+}
+
+.paginacion a {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    padding: .6rem;
+}
+
+.paginacion a:hover {
+    background-color: rgba(214, 203, 203);
+}
+
+.paginacion a.pagina-actual {
+    background-color: rgba(214, 203, 203);
 }

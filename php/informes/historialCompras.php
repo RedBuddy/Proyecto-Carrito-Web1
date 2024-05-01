@@ -15,7 +15,7 @@ $db = conectarBD();
 $usuario = $_SESSION['username'];
 
 // Consultar el historial de compras del usuario
-$consulta = "SELECT ventas.ID AS NumeroCompra, detalle_venta.Producto, detalle_venta.Cantidad, ventas.Total
+$consulta = "SELECT ventas.ID AS NumeroCompra, detalle_venta.Producto, detalle_venta.Cantidad, ventas.Fecha, ventas.Total
              FROM ventas
              INNER JOIN detalle_venta ON ventas.ID = detalle_venta.Venta_id
              WHERE ventas.Usuario = '$usuario'";
@@ -40,12 +40,29 @@ while ($fila = $resultado->fetch_assoc()) {
   $filas_agrupadas[$numero_compra]['productos'][] = array(
     'producto' => $fila['Producto'],
     'cantidad' => $fila['Cantidad'],
+    'fecha' => $fila['Fecha'],
     'total' => $fila['Total']
   );
 }
 
 // Cerrar la conexión a la base de datos
 $db->close();
+
+// Definir el número de elementos por página
+$elementos_por_pagina = 10;
+
+// Calcular el número total de páginas
+$total_paginas = ceil(count($filas_agrupadas) / $elementos_por_pagina);
+
+// Obtener el número de página actual
+$pagina_actual = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+
+// Calcular el índice de inicio y fin para la página actual
+$indice_inicio = ($pagina_actual - 1) * $elementos_por_pagina;
+$indice_fin = $indice_inicio + $elementos_por_pagina;
+
+// Filtrar las filas agrupadas para la página actual
+$filas_pagina = array_slice($filas_agrupadas, $indice_inicio, $elementos_por_pagina);
 ?>
 
 <!DOCTYPE html>
@@ -72,25 +89,28 @@ $db->close();
       <h1>Café del bosque</h1>
     </a>
     <div class="header-links">
-      <a class="link" href="../productos.php">Productos</a>
-      <a class="link" href="../configuracion.php">Configuración</a>
-      <a class="link" href="../contacto.php">Contacto</a>
-      <a class="link seleccionado" href="historialCompras.php">Historial compras</a>
-
-      <?php
-      if (isset($_SESSION['username'])) {
-        if ($_SESSION['username'] == 'admin') {
-          echo "<a class='link' href='../administracion.php'>Administración</a>";
-        }
-      }
-      ?>
-      <a class="link" href="../gestion_usuarios/editar_usuario.php">Editar Perfil</a>
+      <a class="link" href="../productos.php">Inicio</a>
+      <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
+      <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+      <a class="link seleccionado" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
+      <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
+      <a class="link" href="ventas.php">Informes</a>
     </div>
   </header>
   <div class="banner">
     <div class="subtitulo">
-      <h2>Historial de Compras</h2>
+      <h2>Historial de ventas de <?php echo $usuario; ?></h2>
     </div>
+  </div>
+
+  <div class="paginacion">
+    <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+      <?php if ($i == $pagina_actual) : ?>
+        <a class="pagina-actual"><?php echo $i; ?></a>
+      <?php else : ?>
+        <a href="?pagina=<?php echo $i; ?>&id=<?php echo $usuario; ?>"><?php echo $i; ?></a>
+      <?php endif; ?>
+    <?php endfor; ?>
   </div>
 
   <div class="tabla-ventas">
@@ -98,17 +118,19 @@ $db->close();
       <thead>
         <tr>
           <th>Número de Compra</th>
+          <th>Fecha</th>
           <th>Producto</th>
           <th>Cantidad</th>
           <th>Total de Compra</th>
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($filas_agrupadas as $fila) : ?>
+        <?php foreach ($filas_pagina as $fila) : ?>
           <?php foreach ($fila['productos'] as $index => $producto) : ?>
             <tr>
               <?php if ($index === 0) : ?>
                 <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo $fila['numero_compra']; ?></td>
+                <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo $producto['fecha']; ?></td>
               <?php endif; ?>
               <td><?php echo $producto['producto']; ?></td>
               <td><?php echo $producto['cantidad']; ?></td>

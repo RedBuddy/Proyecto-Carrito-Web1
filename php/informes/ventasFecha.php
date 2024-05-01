@@ -25,7 +25,7 @@ if (!isset($_GET['desde']) && !isset($_GET['hasta'])) {
 }
 
 // Consultar las ventas por rango de fecha
-$consulta_ventas = "SELECT ventas.ID AS NumeroVenta, detalle_venta.Producto, detalle_venta.Cantidad, ventas.Total, ventas.Usuario
+$consulta_ventas = "SELECT ventas.ID AS NumeroVenta, detalle_venta.Producto, detalle_venta.Cantidad, ventas.Total, ventas.Fecha, ventas.Usuario
                     FROM ventas
                     INNER JOIN detalle_venta ON ventas.ID = detalle_venta.Venta_id
                     WHERE ventas.Fecha BETWEEN '$desde' AND '$hasta'";
@@ -50,6 +50,7 @@ while ($fila = $resultado_ventas->fetch_assoc()) {
     'producto' => $fila['Producto'],
     'cantidad' => $fila['Cantidad'],
     'total' => $fila['Total'],
+    'fecha' => $fila['Fecha'],
     'usuario' => $fila['Usuario']
   );
 }
@@ -158,6 +159,7 @@ $db->close();
           <tr>
             <th>Número de Venta</th>
             <th>Usuario</th>
+            <th>Fecha</th>
             <th>Producto</th>
             <th>Cantidad</th>
             <th>Total de Venta</th>
@@ -170,6 +172,7 @@ $db->close();
                 <?php if ($index === 0) : ?>
                   <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo $fila['numero_venta']; ?></td>
                   <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo $producto['usuario']; ?></td>
+                  <td rowspan="<?php echo count($fila['productos']); ?>"><?php echo $producto['fecha']; ?></td>
                 <?php endif; ?>
                 <td><?php echo $producto['producto']; ?></td>
                 <td><?php echo $producto['cantidad']; ?></td>

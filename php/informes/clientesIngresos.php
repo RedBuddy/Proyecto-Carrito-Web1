@@ -160,11 +160,13 @@ $total_paginas = ceil($total_clientes / $resultados_por_pagina);
     function mostrarTabla() {
       document.getElementById('tablaVentas').style.display = 'block';
       document.getElementById('divGrafica').style.display = 'none';
+      document.querySelector('.paginacion').style.display = 'flex';
     }
 
     function mostrarGrafica() {
       document.getElementById('tablaVentas').style.display = 'none';
       document.getElementById('divGrafica').style.display = 'flex';
+      document.querySelector('.paginacion').style.display = 'none';
     }
     // Obtener los datos de los clientes que generan más ingresos
     let clientesMasIngresos = [
