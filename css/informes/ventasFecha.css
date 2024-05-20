@@ -142,19 +142,19 @@ body {
 }
 
 .busqueda-ventas {
-  max-width: 600px;
   /* Ancho máximo del contenedor */
   margin: 2rem auto;
   /* Centra horizontalmente */
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .busqueda-ventas label {
   margin-right: 10px;
 }
 
-.busqueda-ventas input[type="date"] {
+.busqueda-ventas input {
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -228,5 +228,11 @@ td img {
 .alinear {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.alinear-parrafo {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }

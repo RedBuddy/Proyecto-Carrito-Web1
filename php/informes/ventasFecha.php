@@ -15,20 +15,21 @@ require '../../includes/config/database.php';
 // Establecer conexión a la base de datos
 $db = conectarBD();
 
-// Obtener las fechas desde el formulario
-if (!isset($_GET['desde']) && !isset($_GET['hasta'])) {
-  $desde = 0;
-  $hasta = 0;
-} else {
-  $desde = $_GET['desde'];
-  $hasta = $_GET['hasta'];
-}
+// Obtener las fechas y el término de búsqueda del formulario
+$desde = isset($_GET['desde']) ? $_GET['desde'] : '';
+$hasta = isset($_GET['hasta']) ? $_GET['hasta'] : '';
+$producto_busqueda = isset($_GET['producto']) ? $_GET['producto'] : '';
 
-// Consultar las ventas por rango de fecha
+// Consultar las ventas por rango de fecha y término de producto
 $consulta_ventas = "SELECT ventas.ID AS NumeroVenta, detalle_venta.Producto, detalle_venta.Cantidad, ventas.Total, ventas.Fecha, ventas.Usuario
                     FROM ventas
                     INNER JOIN detalle_venta ON ventas.ID = detalle_venta.Venta_id
                     WHERE ventas.Fecha BETWEEN '$desde' AND '$hasta'";
+
+if (!empty($producto_busqueda)) {
+  $consulta_ventas .= " AND detalle_venta.Producto LIKE '%$producto_busqueda%'";
+}
+
 $resultado_ventas = $db->query($consulta_ventas);
 
 // Crear un array para almacenar temporalmente las filas agrupadas por número de venta
@@ -138,11 +139,13 @@ $db->close();
       <input type="date" id="desde" name="desde" value="<?php echo $desde; ?>" />
       <label for="hasta">Al:</label>
       <input type="date" id="hasta" name="hasta" value="<?php echo $hasta; ?>" />
+      <label for="producto">Producto:</label>
+      <input type="text" id="producto" name="producto" value="<?php echo $producto_busqueda; ?>" placeholder="Campo opcional..." />
       <button type="submit" class="boton-buscar">Buscar</button>
     </form>
   </div>
 
-  <?php if (isset($filas_pagina)) : ?>
+  <?php if (!empty($filas_pagina)) : ?>
     <div class="tabla-ventas">
       <table>
         <thead>
@@ -176,7 +179,9 @@ $db->close();
       </table>
     </div>
   <?php else : ?>
-    <p>No hay resultados para mostrar.</p>
+    <div class="alinear-parrafo">
+      <p>No hay resultados para mostrar.</p>
+    </div>
   <?php endif; ?>
 
   <div class="paginacion">
@@ -184,7 +189,7 @@ $db->close();
       <?php if ($i == $pagina_actual) : ?>
         <a class="pagina-actual"><?php echo $i; ?></a>
       <?php else : ?>
-        <a href="?pagina=<?php echo $i; ?>&desde=<?php echo $desde; ?>&hasta=<?php echo $hasta; ?>"><?php echo $i; ?></a>
+        <a href="?pagina=<?php echo $i; ?>&desde=<?php echo $desde; ?>&hasta=<?php echo $hasta; ?>&producto=<?php echo $producto_busqueda; ?>"><?php echo $i; ?></a>
       <?php endif; ?>
     <?php endfor; ?>
   </div>
