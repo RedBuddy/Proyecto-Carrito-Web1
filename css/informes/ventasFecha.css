@@ -204,14 +204,9 @@ td img {
 }
 
 .paginacion {
-<<<<<<< HEAD
-  margin: 2rem 0 2rem 0;
+  margin: 2rem 0 3rem 0;
   display: flex;
   justify-content: center;
-=======
-  margin: 2rem 0 0 2rem;
-  display: flex;
->>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
   /* gap: .5rem; */
 }
 

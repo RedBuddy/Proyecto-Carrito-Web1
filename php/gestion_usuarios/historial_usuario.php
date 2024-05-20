@@ -94,27 +94,13 @@ $filas_pagina = array_slice($filas_agrupadas, $indice_inicio, $elementos_por_pag
       <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
       <a class="link seleccionado" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
       <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
-<<<<<<< HEAD
       <a class="link" href="../informes/ventas.php">Informes</a>
-=======
-      <a class="link" href="ventas.php">Informes</a>
->>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
     </div>
   </header>
   <div class="banner">
     <div class="subtitulo">
       <h2>Historial de ventas de <?php echo $usuario; ?></h2>
     </div>
-  </div>
-
-  <div class="paginacion">
-    <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
-      <?php if ($i == $pagina_actual) : ?>
-        <a class="pagina-actual"><?php echo $i; ?></a>
-      <?php else : ?>
-        <a href="?pagina=<?php echo $i; ?>&id=<?php echo $usuario; ?>"><?php echo $i; ?></a>
-      <?php endif; ?>
-    <?php endfor; ?>
   </div>
 
   <div class="tabla-ventas">
@@ -146,6 +132,16 @@ $filas_pagina = array_slice($filas_agrupadas, $indice_inicio, $elementos_por_pag
         <?php endforeach; ?>
       </tbody>
     </table>
+  </div>
+
+  <div class="paginacion">
+    <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+      <?php if ($i == $pagina_actual) : ?>
+        <a class="pagina-actual"><?php echo $i; ?></a>
+      <?php else : ?>
+        <a href="?pagina=<?php echo $i; ?>&id=<?php echo $usuario; ?>"><?php echo $i; ?></a>
+      <?php endif; ?>
+    <?php endfor; ?>
   </div>
 
   <script src="../js/configuracion.js"></script>

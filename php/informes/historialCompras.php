@@ -89,7 +89,6 @@ $filas_pagina = array_slice($filas_agrupadas, $indice_inicio, $elementos_por_pag
       <h1>Café del bosque</h1>
     </a>
     <div class="header-links">
-<<<<<<< HEAD
       <a class="link" href="../productos.php">Productos</a>
       <a class="link" href="../configuracion.php">Configuracion</a>
       <a class="link" href="../contacto.php">Contacto</a>
@@ -112,34 +111,12 @@ $filas_pagina = array_slice($filas_agrupadas, $indice_inicio, $elementos_por_pag
       }
       echo "<a class='boton btn-carrito' href='../carrito.php'>Carrito (<span class='boton-carrito'>{$cantidadProductos}</span>)</a>";
       ?>
-=======
-      <a class="link" href="../productos.php">Inicio</a>
-      <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
-      <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
-      <a class="link seleccionado" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
-      <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
-      <a class="link" href="ventas.php">Informes</a>
->>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
     </div>
   </header>
   <div class="banner">
     <div class="subtitulo">
-<<<<<<< HEAD
       <h2>Historial de compras</h2>
-=======
-      <h2>Historial de ventas de <?php echo $usuario; ?></h2>
->>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
     </div>
-  </div>
-
-  <div class="paginacion">
-    <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
-      <?php if ($i == $pagina_actual) : ?>
-        <a class="pagina-actual"><?php echo $i; ?></a>
-      <?php else : ?>
-        <a href="?pagina=<?php echo $i; ?>&id=<?php echo $usuario; ?>"><?php echo $i; ?></a>
-      <?php endif; ?>
-    <?php endfor; ?>
   </div>
 
   <div class="tabla-ventas">

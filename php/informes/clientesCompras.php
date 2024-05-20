@@ -106,21 +106,6 @@ $total_paginas = ceil($total_clientes / $resultados_por_pagina);
   </div>
 
   <div class="alinear">
-    <!-- Paginación -->
-    <div class="paginacion">
-      <?php if ($total_paginas > 1) : ?>
-        <?php if ($pagina_actual > 1) : ?>
-          <a href="clientesCompras.php?orden=<?php echo $ordenamiento; ?>&pagina=<?php echo $pagina_actual - 1; ?>" class="boton-paginacion">&lt;</a>
-        <?php endif; ?>
-        <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
-          <a href="clientesCompras.php?orden=<?php echo $ordenamiento; ?>&pagina=<?php echo $i; ?>" class="boton-paginacion <?php echo ($i == $pagina_actual) ? 'activo' : ''; ?>"><?php echo $i; ?></a>
-        <?php endfor; ?>
-        <?php if ($pagina_actual < $total_paginas) : ?>
-          <a href="clientesCompras.php?orden=<?php echo $ordenamiento; ?>&pagina=<?php echo $pagina_actual + 1; ?>" class="boton-paginacion">&gt;</a>
-        <?php endif; ?>
-      <?php endif; ?>
-    </div>
-
     <div class="botones-vendidos">
       <button id="mostrarTabla" class="boton-vendidos" onclick="mostrarTabla()">Mostrar Tabla</button>
       <button id="mostrarGrafica" class="boton-vendidos" onclick="mostrarGrafica()">Mostrar Gráfica</button>
@@ -152,6 +137,21 @@ $total_paginas = ceil($total_clientes / $resultados_por_pagina);
     <div class="grafica-container">
       <canvas id="graficaClientesCompras"></canvas>
     </div>
+  </div>
+
+  <!-- Paginación -->
+  <div class="paginacion">
+    <?php if ($total_paginas > 1) : ?>
+      <?php if ($pagina_actual > 1) : ?>
+        <a href="clientesCompras.php?orden=<?php echo $ordenamiento; ?>&pagina=<?php echo $pagina_actual - 1; ?>" class="boton-paginacion">&lt;</a>
+      <?php endif; ?>
+      <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+        <a href="clientesCompras.php?orden=<?php echo $ordenamiento; ?>&pagina=<?php echo $i; ?>" class="boton-paginacion <?php echo ($i == $pagina_actual) ? 'activo' : ''; ?>"><?php echo $i; ?></a>
+      <?php endfor; ?>
+      <?php if ($pagina_actual < $total_paginas) : ?>
+        <a href="clientesCompras.php?orden=<?php echo $ordenamiento; ?>&pagina=<?php echo $pagina_actual + 1; ?>" class="boton-paginacion">&gt;</a>
+      <?php endif; ?>
+    <?php endif; ?>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
