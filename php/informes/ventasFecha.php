@@ -142,6 +142,19 @@ $db->close();
     </form>
   </div>
 
+<<<<<<< HEAD
+=======
+  <div class="paginacion">
+    <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+      <?php if ($i == $pagina_actual) : ?>
+        <a class="pagina-actual"><?php echo $i; ?></a>
+      <?php else : ?>
+        <a href="?pagina=<?php echo $i; ?>&desde=<?php echo $desde; ?>&hasta=<?php echo $hasta; ?>"><?php echo $i; ?></a>
+      <?php endif; ?>
+    <?php endfor; ?>
+  </div>
+
+>>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
   <?php if (isset($filas_pagina)) : ?>
     <div class="tabla-ventas">
       <table>
@@ -179,6 +192,7 @@ $db->close();
     <p>No hay resultados para mostrar.</p>
   <?php endif; ?>
 
+<<<<<<< HEAD
   <div class="paginacion">
     <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
       <?php if ($i == $pagina_actual) : ?>
@@ -189,6 +203,8 @@ $db->close();
     <?php endfor; ?>
   </div>
 
+=======
+>>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
   <script src="../js/configuracion.js"></script>
   <script src="../js/productos.js"></script>
 </body>

@@ -49,7 +49,11 @@ mysqli_close($db);
     <title>Página de Gestión de Usuarios</title>
     <!-- Estilos -->
     <link rel="stylesheet" href="../../css/normalize.css" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="../../css/gestion_usuarios.css" />
+=======
+    <link rel="stylesheet" href="../../css/gestion.css" />
+>>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -78,8 +82,13 @@ mysqli_close($db);
         </div>
         <!-- <div class="gestion-links-cont">
             <div class="gestion-links">
+<<<<<<< HEAD
                 <a class="link-gestion" href="gestion_usuarios.php">Gestión de usuarios</a>
                 <a class="link-gestion" href="crear_usuario.php">Agregar usuario</a>
+=======
+                <a class="link-gestion" href="baja_usuario.php">Alta/Baja usuario</a>
+                <a class="link-gestion" href="modificar_usuario.php">Modificar usuario</a>
+>>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
             </div>
         </div> -->
     </div>
@@ -95,6 +104,7 @@ mysqli_close($db);
     } ?>
 
     <!-- Barra de búsqueda -->
+<<<<<<< HEAD
     <div class="alinear">
         <form class="search-bar">
             <input type="text" id="filtro" placeholder="Buscar por nombre de usuario..." />
@@ -103,6 +113,12 @@ mysqli_close($db);
         <a class="boton-agregar" href="agregar_usuario.php">Agregar usuario</a>
     </div>
 
+=======
+    <form class="search-bar">
+        <input type="text" id="filtro" placeholder="Buscar por nombre de usuario..." />
+        <button type="submit">Borrar</button>
+    </form>
+>>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
 
     <div class="lista-productos" id="lista-productos">
         <?php foreach ($usuarios as $usuario) : ?>

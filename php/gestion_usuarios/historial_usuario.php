@@ -94,7 +94,11 @@ $filas_pagina = array_slice($filas_agrupadas, $indice_inicio, $elementos_por_pag
       <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
       <a class="link seleccionado" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
       <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
+<<<<<<< HEAD
       <a class="link" href="../informes/ventas.php">Informes</a>
+=======
+      <a class="link" href="ventas.php">Informes</a>
+>>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
     </div>
   </header>
   <div class="banner">
