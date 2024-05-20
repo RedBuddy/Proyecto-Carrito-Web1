@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+require '../includes/config/database.php';
+$db = conectarBD();
+
 if (!isset($_SESSION['username'])) {
     header("Location: ../index.php");
 }
@@ -9,7 +12,38 @@ if (!isset($_SESSION['username'])) {
 if (isset($_SESSION["carrito"]) && is_array($_SESSION["carrito"]) && !empty($_SESSION["carrito"])) {
     $productos = $_SESSION["carrito"];
     $total = 0;
+
+    // Insertar la venta en la tabla 'ventas'
+    $fecha = date("Y-m-d");
+    $usuario = $_SESSION['username'];
+    $insert_venta = "INSERT INTO ventas (Usuario, Fecha, Total) VALUES ('$usuario', '$fecha', $total)";
+    $db->query($insert_venta);
+
+    // Obtener el ID de la venta insertada
+    $venta_id = $db->insert_id;
+
+    // Insertar cada producto en la tabla 'detalle_venta'
+    foreach ($productos as $producto) {
+        $nombre = $producto['nombre'];
+        $cantidad = $producto['cantidad'];
+        $precio_unitario = $producto['precio'];
+        $subtotal = $cantidad * $precio_unitario;
+
+        $insert_detalle_venta = "INSERT INTO detalle_venta (Venta_id, Producto, Cantidad, Precio_unitario, Subtotal) VALUES ($venta_id, '$nombre', $cantidad, $precio_unitario, $subtotal)";
+        $db->query($insert_detalle_venta);
+
+        // Calcular el total de la venta
+        $total += $subtotal;
+    }
+
+    // Actualizar el total en la venta
+    $update_venta = "UPDATE ventas SET Total = $total WHERE ID = $venta_id";
+    $db->query($update_venta);
+
+    // Cerrar la conexión a la base de datos
+    $db->close();
 }
+?>
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -46,6 +80,7 @@ if (isset($_SESSION["carrito"]) && is_array($_SESSION["carrito"]) && !empty($_SE
 
             <div class="ticket">
                 <h2>Ticket de compra</h2>
+                <?php $total = 0; ?>
                 <?php foreach ($productos as $producto) : ?>
                     <div class="producto">
                         <span><?php echo $producto['nombre']; ?></span>

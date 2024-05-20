@@ -130,8 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
 
             if (isset($_SESSION['username'])) {
                 if ($_SESSION['username'] == 'admin') {
-                    echo "<a class='link' href='gestion_productos/gestion.php'>Gestión de productos</a>";
-                    echo "<a class='link' href='informes/ventas.php'>Informes</a>";
+                    echo "<a class='link' href='administracion.php'>Administración</a>";
                 }
             }
 
@@ -165,6 +164,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
         </form>
     </div>
 
+    <div class="contenedor-centrado">
+        <ul class="contenedor-productos" id="lista-productos">
+            <?php foreach ($productos as $producto) : ?>
+                <li data-nombre="<?php echo strtolower($producto['nombre']); ?>">
+                    <div class="producto">
+                        <div class="cont-img">
+                            <img src="<?php echo $producto['imagen']; ?>" alt="imagen producto">
+                        </div>
+                        <h3 class="titulo-producto"><?php echo $producto['nombre']; ?></h3>
+                        <h3 class="stock-producto">Disponibles: <span><?php echo $producto['stock']; ?></span></h3>
+                        <div class="cont-precio-boton">
+                            <h3 class="precio-producto">$<?php echo $producto['precio']; ?> / pz</h3>
+                            <form method="post" action="">
+                                <input type="hidden" name="producto_id" value="<?php echo $producto['id']; ?>">
+                                <button class="agregar-carrito" type="submit" name="agregar">Agregar al carrito</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
     <div class="paginacion">
         <?php
         $query_total = "SELECT COUNT(*) AS total FROM productos p INNER JOIN almacen a ON p.ID = a.ProductoID WHERE a.Stock > 0 AND p.Activo = 1";
@@ -191,34 +214,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
         }
         ?>
     </div>
-
-
-
-    <div class="contenedor-centrado">
-        <ul class="contenedor-productos" id="lista-productos">
-            <?php foreach ($productos as $producto) : ?>
-                <li data-nombre="<?php echo strtolower($producto['nombre']); ?>">
-                    <div class="producto">
-                        <div class="cont-img">
-                            <img src="<?php echo $producto['imagen']; ?>" alt="imagen producto">
-                        </div>
-                        <h3 class="titulo-producto"><?php echo $producto['nombre']; ?></h3>
-                        <h3 class="stock-producto">Disponibles: <span><?php echo $producto['stock']; ?></span></h3>
-                        <div class="cont-precio-boton">
-                            <h3 class="precio-producto">$<?php echo $producto['precio']; ?> / pz</h3>
-                            <form method="post" action="">
-                                <input type="hidden" name="producto_id" value="<?php echo $producto['id']; ?>">
-                                <button class="agregar-carrito" type="submit" name="agregar">Agregar al carrito</button>
-                            </form>
-
-                        </div>
-                    </div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-
-
 
     <script>
         // Script para filtrar productos

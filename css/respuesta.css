@@ -125,3 +125,19 @@ body {
 .formulario-respuesta .botones button:hover {
     background-color: #644f4f;
 }
+
+.boton-cancelar {
+    background-color: #7e6363;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.boton-cancelar:hover {
+    background-color: #644f4f;
+}

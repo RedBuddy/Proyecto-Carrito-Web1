@@ -92,22 +92,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <header class="header">
-        <div class="header-logo">
+        <a class="header-logo" href="productos.php">
             <img src="../img/cafe.webp" alt="cafe logo" />
             <h1>Café del bosque</h1>
-        </div>
+        </a>
         <div class="header-links">
             <a class="link" href="productos.php">Productos</a>
             <a class="link" href="configuracion.php">Configuración</a>
             <a class="link" href="contacto.php">Contacto</a>
+            <a class="link" href="informes/historialCompras.php">Historial compras</a>
+
             <?php
             if (isset($_SESSION['username'])) {
                 if ($_SESSION['username'] == 'admin') {
-                    echo "<a class='link' href='gestion_productos/gestion.php'>Gestión de productos</a>";
+                    echo "<a class='link' href='administracion.php'>Administración</a>";
                 }
             }
+
+            echo "<a class='link seleccionado' href='editar_usuario.php'>Editar Perfil</a>";
+
+            $cantidadProductos = 0;
+            if (isset($_SESSION["carrito"]) && is_array($_SESSION["carrito"])) {
+                $cantidadProductos = count($_SESSION["carrito"]);
+            }
+            echo "<a class='btn-carrito' href='carrito.php'>Carrito (<span class='boton-carrito'>{$cantidadProductos}</span>)</a>";
             ?>
-            <a class="link seleccionado" href="editar_usuario.php">Editar Perfil</a>
+
         </div>
     </header>
     <div class="banner">
@@ -148,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="number" id="edad" name="edad" value="<?php echo $edad; ?>" />
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="<?php echo $email; ?>" />
+                <input type="email" id="email" name="email" value="<?php echo $email; ?>" readonly />
 
                 <label for="usuario">Usuario:</label>
                 <input type="text" id="usuario" name="usuario" value="<?php echo $usuario; ?>" />

@@ -88,7 +88,7 @@ body {
 .gestion-links {
     display: flex;
     gap: 4rem;
-    margin-right: 3rem;
+    margin-right: 20rem;
 }
 
 .link-gestion {
@@ -166,8 +166,8 @@ body {
 
 /* Estilos para la barra de búsqueda */
 .search-bar {
-    margin: 20px auto;
-    max-width: 500px;
+    margin: 1rem 1rem;
+    width: 30rem;
     padding: 10px;
     background-color: #f3f3f3;
     border-radius: 5px;
@@ -374,4 +374,27 @@ body {
 
 .editar-fix {
     margin-left: 5rem;
+}
+
+.alinear {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+
+.boton-agregar {
+    margin: 1rem 1rem;
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: 1.2rem 1.2rem;
+    text-decoration: none;
+    font-size: medium;
+}
+
+.boton-agregar:hover {
+    background-color: #644f4f;
+    cursor: pointer;
 }

@@ -12,7 +12,7 @@ require '../../includes/config/database.php';
 $db = conectarBD();
 
 // Obtener el nombre de usuario de la sesión
-$usuario = $_SESSION['username'];
+$usuario = $_GET["id"];
 
 // Consultar el historial de compras del usuario
 $consulta = "SELECT ventas.ID AS NumeroCompra, detalle_venta.Producto, detalle_venta.Cantidad, ventas.Fecha, ventas.Total
@@ -89,34 +89,28 @@ $filas_pagina = array_slice($filas_agrupadas, $indice_inicio, $elementos_por_pag
       <h1>Café del bosque</h1>
     </a>
     <div class="header-links">
-      <a class="link" href="../productos.php">Productos</a>
-      <a class="link" href="../configuracion.php">Configuracion</a>
-      <a class="link" href="../contacto.php">Contacto</a>
-      <a class="link seleccionado" href="historialCompras.php">Historial compras</a>
-
-      <?php
-
-      if (isset($_SESSION['username'])) {
-        if ($_SESSION['username'] == 'admin') {
-          echo "<a class='link' href='../administracion.php'>Administración</a>";
-        }
-      }
-
-      $usuario = $_SESSION['username'];
-      echo "<a class='link' href='../editar_usuario.php'>$usuario</a>";
-
-      $cantidadProductos = 0;
-      if (isset($_SESSION["carrito"]) && is_array($_SESSION["carrito"])) {
-        $cantidadProductos = count($_SESSION["carrito"]);
-      }
-      echo "<a class='boton btn-carrito' href='../carrito.php'>Carrito (<span class='boton-carrito'>{$cantidadProductos}</span>)</a>";
-      ?>
+      <a class="link" href="../productos.php">Inicio</a>
+      <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
+      <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+      <a class="link seleccionado" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
+      <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
+      <a class="link" href="../informes/ventas.php">Informes</a>
     </div>
   </header>
   <div class="banner">
     <div class="subtitulo">
-      <h2>Historial de compras</h2>
+      <h2>Historial de ventas de <?php echo $usuario; ?></h2>
     </div>
+  </div>
+
+  <div class="paginacion">
+    <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+      <?php if ($i == $pagina_actual) : ?>
+        <a class="pagina-actual"><?php echo $i; ?></a>
+      <?php else : ?>
+        <a href="?pagina=<?php echo $i; ?>&id=<?php echo $usuario; ?>"><?php echo $i; ?></a>
+      <?php endif; ?>
+    <?php endfor; ?>
   </div>
 
   <div class="tabla-ventas">
@@ -148,16 +142,6 @@ $filas_pagina = array_slice($filas_agrupadas, $indice_inicio, $elementos_por_pag
         <?php endforeach; ?>
       </tbody>
     </table>
-  </div>
-
-  <div class="paginacion">
-    <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
-      <?php if ($i == $pagina_actual) : ?>
-        <a class="pagina-actual"><?php echo $i; ?></a>
-      <?php else : ?>
-        <a href="?pagina=<?php echo $i; ?>&id=<?php echo $usuario; ?>"><?php echo $i; ?></a>
-      <?php endif; ?>
-    <?php endfor; ?>
   </div>
 
   <script src="../js/configuracion.js"></script>

@@ -79,9 +79,10 @@ body {
 }
 
 .gestion-buttons {
+  background-color: #ACA885;
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .link-gestion {
@@ -102,7 +103,7 @@ body {
 
 .tabla-ventas {
   margin: 20px auto;
-  max-width: 900px;
+  max-width: 70%;
   background-color: #f3f3f3;
   border-radius: 10px;
   overflow: hidden;
@@ -143,11 +144,10 @@ body {
 .busqueda-ventas {
   max-width: 600px;
   /* Ancho máximo del contenedor */
-  margin: 0 auto;
+  margin: 2rem auto;
   /* Centra horizontalmente */
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .busqueda-ventas label {
@@ -174,4 +174,59 @@ body {
 
 .busqueda-ventas .boton-buscar:hover {
   background-color: #644f4f;
+}
+
+.boton-vendidos {
+  border-radius: .4rem;
+  border-style: none;
+  background-color: #7E6363;
+  color: white;
+  padding: .7rem 1.2rem;
+  text-decoration: none;
+  font-size: small;
+  margin: 10px;
+}
+
+.boton-vendidos:hover {
+  background-color: #644f4f;
+  cursor: pointer;
+}
+
+.botones-vendidos {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-right: 19rem;
+}
+
+td img {
+  max-width: 5rem;
+}
+
+.paginacion {
+  margin: 2rem 0 2rem 0;
+  display: flex;
+  justify-content: center;
+  /* gap: .5rem; */
+}
+
+.paginacion a {
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  padding: .6rem;
+}
+
+.paginacion a:hover {
+  background-color: rgba(214, 203, 203);
+}
+
+.paginacion a.pagina-actual {
+  background-color: rgba(214, 203, 203);
+}
+
+.alinear {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

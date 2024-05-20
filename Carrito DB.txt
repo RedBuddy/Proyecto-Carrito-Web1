@@ -7,7 +7,8 @@ CREATE TABLE usuarios (
     Usuario varchar(100) NOT NULL,
     Contrasena varbinary(100) NOT NULL,
     Verificado BOOLEAN NOT NULL DEFAULT FALSE,
-    CONSTRAINT PK_Usuario PRIMARY KEY (ID)
+    Activo BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT PK_usuarios PRIMARY KEY (ID)
 );
 
 INSERT INTO `usuarios` (`ID`, `Nombre`, `Edad`, `Email`, `Usuario`, `Contrasena`, `Verificado`) VALUES (NULL, 'administrador', '99', 'admin@gmail.com', 'admin', 0x24327924313024454b71512e4b596e42375a6d734a30325972334265756a52697239426c6e656457762e304e66553953756e5a2f424c5067755a724b, TRUE)
@@ -56,3 +57,23 @@ CREATE TABLE mensajes (
 );
 
 INSERT INTO mensajes (Usuario, Nombre, Correo, Mensaje) VALUES ('admin', 'orlando', 'orlando@orlando.com', 'mensaje si sisisi')
+
+
+CREATE TABLE ventas (
+    ID INT NOT NULL AUTO_INCREMENT,
+    Usuario varchar(100) NOT NULL,
+    Fecha DATE NOT NULL,
+    Total DECIMAL(10, 2) NOT NULL,
+    CONSTRAINT PK_ventas PRIMARY KEY (ID)
+);
+
+CREATE TABLE detalle_venta (
+    ID INT NOT NULL AUTO_INCREMENT,
+    Venta_id INT NOT NULL,
+    Producto VARCHAR(255) NOT NULL,
+    Cantidad INT NOT NULL,
+    Precio_unitario DECIMAL(10, 2) NOT NULL,
+    Subtotal DECIMAL(10, 2) NOT NULL,
+    CONSTRAINT PK_detalle_venta PRIMARY KEY (ID),
+    FOREIGN KEY (Venta_id) REFERENCES ventas(ID)
+);

@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $res = mysqli_query($db, $query);
 
         if ($res) {
+            $_SESSION["error"] = "Revisa tu bandeja de spam.";
 
             $otp = rand(100000, 999999);
             $_SESSION['otp'] = $otp;

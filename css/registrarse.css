@@ -130,6 +130,7 @@ h1 {
 .btn-continuar {
     padding: .5rem 3rem;
     text-decoration: none;
+    text-align: center;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -171,4 +172,8 @@ p {
     width: 25%;
     background-color: #503C3C;
     padding: 0 .5rem 1rem .5rem;
+}
+
+.aviso-verificacion {
+    margin-top: .5rem;
 }

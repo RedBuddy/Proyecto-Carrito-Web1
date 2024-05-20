@@ -14,6 +14,32 @@ function verificarProductos($productos)
         $row = mysqli_fetch_assoc($result);
         $cantidadAlmacen = $row['Stock'];
 
+        echo "cantidad pedida:" . $cantidad['cantidad'];
+        echo "cantidad almacen:" . $cantidadAlmacen;
+
+        // Verificar si hay suficientes productos en 'almacen'
+        if ($cantidadAlmacen >= $cantidad['cantidad']) {
+            mysqli_close($db);
+            return true;
+        } else {
+            mysqli_close($db);
+            return false;
+        }
+    }
+}
+
+function pagarProductos($productos)
+{
+    require '../includes/config/database.php';
+    $db = conectarBD();
+
+    foreach ($productos as $productoId => $cantidad) {
+        // Verificar si el producto está disponible en 'almacen'
+        $query = "SELECT Stock FROM almacen WHERE ProductoID = $productoId";
+        $result = mysqli_query($db, $query);
+        $row = mysqli_fetch_assoc($result);
+        $cantidadAlmacen = $row['Stock'];
+
 
         // Verificar si hay suficientes productos en 'almacen'
         if ($cantidadAlmacen >= $cantidad['cantidad']) {
@@ -47,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actualizar"])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pagar"])) {
 
-    if (verificarProductos($_SESSION["carrito"])) {
+    if (pagarProductos($_SESSION["carrito"])) {
         header("Location: compra.php");
         exit;
     } else {

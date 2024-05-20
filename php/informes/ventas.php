@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+  header("Location: ../../index.php");
+}
+
+if ($_SESSION['username'] != 'admin') {
+  header("Location: ../productos.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,17 +29,17 @@
 
 <body>
   <header class="header">
-    <div class="header-logo">
+    <a class="header-logo" href="../productos.php">
       <img src="../../img/cafe.webp" alt="cafe logo" />
       <h1>Café del bosque</h1>
-    </div>
+    </a>
     <div class="header-links">
-      <a class="link" href="productos.php">Productos</a>
-      <a class="link" href="configuracion.php">Configuración</a>
-      <a class="link" href="contacto.php">Contacto</a>
-      <a class="link" href="gestion.php">Gestión de productos</a>
-      <a class="link" href="gestion.php">Notificaciones</a>
-      <a class="link seleccionado" href="gestion.php">Informes</a>
+      <a class="link" href="../productos.php">Inicio</a>
+      <a class="link" href="../gestion_productos/gestion.php">Gestión de productos</a>
+      <a class="link" href="../gestion_usuarios/gestion_usuarios.php">Gestión de usuarios</a>
+      <a class="link" href="../gestion_usuarios/ventas_usuarios.php">Ventas por usuario</a>
+      <a class="link" href="../mensajes_contacto/notificaciones.php">Notificaciones</a>
+      <a class="link seleccionado" href="ventas.php">Informes</a>
     </div>
   </header>
   <div class="banner">
@@ -38,19 +50,19 @@
 
   <!-- Botones de gestión -->
   <div class="gestion-buttons">
-    <button class="link-gestion" onclick="window.location.href='ventasCantidad.html'">
+    <button class="link-gestion" onclick="window.location.href='ventasCantidad.php'">
       Productos vendidos por cantidad
     </button>
-    <button class="link-gestion" onclick="window.location.href='productosIngresos.html'">
+    <button class="link-gestion" onclick="window.location.href='productosIngresos.php'">
       Productos que generan mas ingresos
     </button>
-    <button class="link-gestion" onclick="window.location.href='clientesCompras.html'">
+    <button class="link-gestion" onclick="window.location.href='clientesCompras.php'">
       Clientes que compran mas productos
     </button>
-    <button class="link-gestion" onclick="window.location.href='clientesIngresos.html'">
+    <button class="link-gestion" onclick="window.location.href='clientesIngresos.php'">
       Clientes que generan mas ingresos
     </button>
-    <button class="link-gestion" onclick="window.location.href='ventasFecha.html'">
+    <button class="link-gestion" onclick="window.location.href='ventasFecha.php'">
       Ventas por día, semana, mes, rango de fecha
     </button>
   </div>

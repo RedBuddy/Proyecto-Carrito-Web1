@@ -79,7 +79,7 @@ body {
 
 .tabla-notificaciones {
   margin: 20px auto;
-  max-width: 900px;
+  max-width: 80%;
   background-color: #f3f3f3;
   border-radius: 10px;
   overflow: hidden;
@@ -115,4 +115,33 @@ body {
 
 .tabla-notificaciones td button:hover {
   background-color: #644f4f;
+}
+
+.status-mensaje {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+  gap: 1rem;
+}
+
+#alerta_verde {
+  margin: 0;
+  padding: 1rem;
+  color: black;
+  justify-content: center;
+  text-align: center;
+  background-color: rgb(55, 203, 55);
+}
+
+#alerta_roja {
+  margin: 0;
+  padding: 1rem;
+  color: white;
+  justify-content: center;
+  text-align: center;
+  background-color: rgb(185, 56, 56);
+}
+
+.botones_contestar {
+  display: flex;
 }

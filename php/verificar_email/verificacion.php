@@ -16,6 +16,7 @@ if (isset($_POST["verificar-otp"])) {
         exit;
     } else {
         mysqli_query($db, "UPDATE usuarios SET verificado = 1 WHERE Email = '$email'");
+        $_SESSION["email_verificado"] = "Exito! Email verificado correctamente.";
         header("Location: ../../index.php");
         exit;
     }
@@ -61,7 +62,7 @@ if (isset($_POST["verificar-otp"])) {
 
             <?php
             if (isset($_SESSION["error"])) {
-                echo "<p>{$_SESSION["error"]}</p>";
+                echo "<p class='aviso-verificacion'>{$_SESSION["error"]}</p>";
                 unset($_SESSION["error"]);
             }
             ?>

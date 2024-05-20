@@ -1,5 +1,5 @@
 body {
-    background-color: #e1ca96;
+    background-color: #E1CA96;
     margin: 0;
     padding: 0;
     font-family: "Inter", sans-serif;
@@ -13,24 +13,25 @@ body {
 .header-logo img {
     width: 3.3rem;
     height: 3.3rem;
-    margin-top: 0.5rem;
+    margin-top: .5rem;
 }
 
 .header-logo h1 {
     font-family: "Island Moments", cursive;
     font-size: 4rem;
     font-weight: normal;
-    color: #434a42;
+    color: #434A42;
     margin: 0;
 }
 
 .header-logo {
-    margin-top: 0.5rem;
+    margin-top: .5rem;
     display: flex;
     text-decoration: none;
 }
 
 .header-links {
+    /* float: right; */
     display: flex;
     gap: 2rem;
     margin: 1.7rem 6rem;
@@ -40,19 +41,16 @@ body {
     text-decoration: none;
     color: black;
     font-weight: normal;
-    margin-top: 0.5rem;
-}
-
-.seleccionado {
-    font-weight: bold;
+    margin-top: .5rem;
 }
 
 .boton {
-    border-radius: 0.4rem;
+    width: 30%;
+    border-radius: .4rem;
     border-style: none;
-    background-color: #7e6363;
+    background-color: #7E6363;
     color: white;
-    padding: 0.7rem 1.2rem;
+    padding: .7rem 1.2rem;
     text-decoration: none;
     font-size: small;
 }
@@ -62,17 +60,38 @@ body {
     cursor: pointer;
 }
 
+.seleccionado {
+    font-weight: bold;
+}
+
 .banner {
-    background-color: #aca885;
+    background-color: #ACA885;
     display: flex;
     justify-content: space-between;
 }
 
+
 .subtitulo h2 {
-    font-size: 2.8rem;
-    font-family: "Times New Roman", Times, serif;
+    font-size: 3.5rem;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: normal;
     margin: 2.5rem 0 1.5rem 5.5rem;
+}
+
+.btn-carrito {
+    max-height: 1rem;
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .7rem 1.2rem;
+    text-decoration: none;
+    font-size: small;
+}
+
+.btn-carrito:hover {
+    background-color: #644f4f;
+    cursor: pointer;
 }
 
 .contenedor {
@@ -132,21 +151,6 @@ body {
     margin-top: 1rem;
 }
 
-.boton {
-    border-radius: .4rem;
-    border-style: none;
-    background-color: #7E6363;
-    color: white;
-    padding: .7rem 1.2rem;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
-.boton:hover {
-    background-color: #644f4f;
-    cursor: pointer;
-}
-
 .botones {
     width: calc(100% - 1.8rem);
     display: flex;
@@ -191,4 +195,10 @@ body {
 .cerrar-sesion:hover {
     background-color: rgb(149, 46, 46);
     cursor: pointer;
+}
+
+p {
+    padding: 0;
+    margin: 0 0 1rem 0;
+    color: rgb(152, 72, 72);
 }
