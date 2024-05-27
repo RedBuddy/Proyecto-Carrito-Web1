@@ -46,6 +46,39 @@ if (!$res) {
     echo "<script>console.log('Error al buscar productos en la BD');</script>";
 }
 
+$query_mas_vendidos = "
+SELECT 
+    p.ID, 
+    p.Nombre, 
+    p.Imagen, 
+    p.Precio, 
+    a.Stock, 
+    SUM(dv.Cantidad) as total_vendido
+FROM 
+    detalle_venta dv
+INNER JOIN 
+    ventas v ON dv.Venta_id = v.ID
+INNER JOIN 
+    productos p ON dv.Producto = p.Nombre
+INNER JOIN 
+    almacen a ON p.ID = a.ProductoID
+GROUP BY 
+    dv.Producto
+ORDER BY 
+    total_vendido DESC
+LIMIT 5";
+
+$res_mas_vendidos = mysqli_query($db, $query_mas_vendidos);
+
+$productos_mas_vendidos = [];
+
+if ($res_mas_vendidos->num_rows > 0) {
+    while ($row = $res_mas_vendidos->fetch_assoc()) {
+        $productos_mas_vendidos[] = $row;
+    }
+}
+
+
 // Verificar si se ha enviado el formulario para agregar al carrito
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
     $productoId = $_POST["producto_id"];
@@ -163,6 +196,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
             <button class="btn-buscar" type="submit">Buscar</button>
         </form>
     </div>
+
+    <nav class="navegacion-mas-vendidos">
+        <h2>Productos Más Vendidos</h2>
+        <ul class="nav-trend">
+            <?php foreach ($productos_mas_vendidos as $producto) : ?>
+                <li class="trend-li">
+                    <div class="trend-producto">
+                        <div class="trend-cont-img">
+                            <img src="<?php echo $producto['Imagen']; ?>" alt="imagen producto">
+                        </div>
+                        <h3 class="trend-titulo-producto"><?php echo $producto['Nombre']; ?></h3>
+                        <h3 class="trend-stock-producto">Disponibles: <span><?php echo $producto['Stock']; ?></span></h3>
+
+                        <div class="trend-cont-precio-boton">
+                            <h3 class="trend-precio-producto">$<?php echo $producto['Precio']; ?> / pz</h3>
+                            <form method="post" action="">
+                                <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
+                                <button class="trend-agregar-carrito" type="submit" name="agregar">Agregar al carrito</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
 
     <div class="contenedor-centrado">
         <ul class="contenedor-productos" id="lista-productos">

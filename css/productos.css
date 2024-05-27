@@ -233,3 +233,72 @@ ul {
 .paginacion a.pagina-actual {
     background-color: rgba(214, 203, 203);
 }
+
+.navegacion-mas-vendidos {
+    background-color: #918B76;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: .3rem;
+}
+
+.nav-trend {
+    border-radius: .3rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.trend-li {
+    border-radius: .3rem;
+    background-color: white;
+    padding: 1rem;
+    width: 17rem;
+}
+
+.trend-cont-img {
+    display: flex;
+    justify-content: center;
+}
+
+.trend-titulo-producto {
+    font-size: .9rem;
+    font-weight: bold;
+}
+
+.trend-stock-producto {
+    font-size: .8rem;
+}
+
+.trend-stock-producto span {
+    font-weight: normal;
+}
+
+.trend-cont-precio-boton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.trend-precio-producto {
+    font-size: .8rem;
+}
+
+.trend-cont-img img {
+    width: 5rem;
+}
+
+.trend-agregar-carrito {
+    background-color: #626C66;
+    color: white;
+    height: 1.5rem;
+    border-style: none;
+    border-radius: 1rem;
+    padding: 0 1rem;
+    font-size: .8rem;
+}
+
+.navegacion-mas-vendidos h2 {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+}

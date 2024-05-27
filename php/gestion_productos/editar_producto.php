@@ -56,12 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($res && $res_stock) {
         mysqli_close($db);
         $_SESSION["producto_editado"] = "Producto editado correctamente.";
-        header("Location: modificar_producto.php");
+        header("Location: gestion.php");
         exit;
     } else {
         mysqli_close($db);
         $_SESSION["producto_editado_error"] = "Error al editar correctamente.";
-        header("Location: modificar_producto.php");
+        header("Location: gestion.php");
     }
 }
 
