@@ -95,7 +95,7 @@ mysqli_close($db);
     } ?>
 
     <!-- Barra de búsqueda -->
-    <form class="search-bar">
+    <form class="search-bar-centro">
         <input type="text" id="filtro" placeholder="Buscar el usuario..." />
         <button type="submit">Borrar</button>
     </form>

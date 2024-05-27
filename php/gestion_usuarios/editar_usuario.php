@@ -71,11 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD
     <title>Edición de usuarios</title>
-=======
-    <title>Página de Gestión de usuarios</title>
->>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
     <!-- Estilos -->
     <link rel="stylesheet" href="../../css/normalize.css" />
     <link rel="stylesheet" href="../../css/editar_usuario.css" />
@@ -103,11 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
     <div class="banner">
         <div class="subtitulo">
-<<<<<<< HEAD
             <h2>Editar usuario</h2>
-=======
-            <h2>Gestión de usuarios</h2>
->>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
         </div>
         <!-- <div class="gestion-links-cont">
             <div class="gestion-links">
@@ -129,7 +121,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="formulario-agregar">
             <form action="#" method="post">
-<<<<<<< HEAD
                 <div class="elemento-info div-nombre">
                     <label for="nombre">Nombre:</label>
                     <input type="text" class="nombre" name="nombre" value="<?php echo $nombre; ?>" />
@@ -149,20 +140,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="usuario">Usuario:</label>
                     <input type="text" class="usuario" name="usuario" value="<?php echo $usuario; ?>" />
                 </div>
-=======
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value="<?php echo $nombre; ?>" />
-
-                <label for="edad">Edad:</label>
-                <input type="number" id="edad" name="edad" value="<?php echo $edad; ?>" />
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="<?php echo $email; ?>" />
-
-                <label for="usuario">Usuario:</label>
-                <input type="text" id="usuario" name="usuario" value="<?php echo $usuario; ?>" />
-
->>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
 
                 <label for="password-new">Nueva contraseña (No obligatorio):</label>
                 <input class="password-new" type="password" name="password-new" placeholder="Nueva contraseña" />
@@ -171,22 +148,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </span>
 
                 <div class="botones">
-<<<<<<< HEAD
                     <button class="boton btn-enviar" type="submit">Actualizar</button>
-=======
-                    <button class="boton" type="submit">Actualizar</button>
->>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
                     <button class="boton" type="reset">Restablecer</button>
                 </div>
             </form>
         </div>
     </div>
     <script src="../../js/configuracion.js"></script>
-<<<<<<< HEAD
     <script src="../../js/verificar_usuario.js"></script>
-=======
-    <script src="../../js/verificaciones.js"></script>
->>>>>>> 524161ad20b8c5923eb50499d4de09dace722775
 </body>
 
 </html>

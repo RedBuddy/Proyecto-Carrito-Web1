@@ -47,11 +47,11 @@ if ($_SESSION['username'] != 'admin') {
             <h2>Gestión de productos</h2>
         </div>
         <div class="gestion-links-cont">
-            <div class="gestion-links">
+            <!-- <div class="gestion-links">
                 <a class="link-gestion" href="agregar_producto.php">Agregar producto</a>
                 <a class="link-gestion" href="baja_producto.php">Alta/Baja producto</a>
                 <a class="link-gestion" href="modificar_producto.php">Modificar producto</a>
-            </div>
+            </div> -->
         </div>
     </div>
     <?php if (isset($_SESSION['producto_agregado'])) {
@@ -88,7 +88,10 @@ if ($_SESSION['username'] != 'admin') {
             </div>
             <!-- Contenedor para mostrar la imagen seleccionada -->
             <div id="imagenSeleccionada"></div>
-            <button class="boton-enviar" type="submit">Agregar</button>
+            <div class="botones">
+                <button class="boton-enviar btn-cont" type="submit">Agregar</button>
+                <button class="boton btn-reset btn-cont" onclick="window.location.href='gestion.php'">Cancelar</button>
+            </div>
         </form>
     </div>
     <script src="../../js/configuracion.js"></script>

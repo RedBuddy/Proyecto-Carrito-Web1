@@ -74,14 +74,14 @@ if (!isset($_SESSION['username'])) {
 
     <div class="banner">
         <div class="subtitulo">
-            <h2>Sobre nosotros</h2>
+            <h2>Contactanos</h2>
         </div>
-        <div class="sobre-nosotros">
+        <!-- <div class="sobre-nosotros">
             <h4>¡Bienvenido a Café del Bosque! Nos dedicamos a ofrecerte los mejores granos de café, cuidadosamente
                 seleccionados de los mejores cafetales del mundo. Nuestro objetivo es brindarte una experiencia única en
                 cada taza, llena de sabor y aroma. ¡Gracias por elegir Café del Bosque para disfrutar de tu café
                 favorito!</h4>
-        </div>
+        </div> -->
     </div>
 
     <?php if (isset($_SESSION['mensaje_enviado'])) {

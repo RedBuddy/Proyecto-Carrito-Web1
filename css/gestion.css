@@ -166,8 +166,8 @@ body {
 
 /* Estilos para la barra de búsqueda */
 .search-bar {
-    margin: 20px auto;
-    max-width: 500px;
+    margin: 1rem 1rem;
+    width: 30rem;
     padding: 10px;
     background-color: #f3f3f3;
     border-radius: 5px;
@@ -250,7 +250,10 @@ body {
 }
 
 .product-item-details {
-    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }
 
 .product-item-details h3 {
@@ -374,4 +377,75 @@ body {
 
 .editar-fix {
     margin-left: 5rem;
+}
+
+.alinear {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+
+.boton-agregar {
+    margin: 1rem 1rem;
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: 1.2rem 1.2rem;
+    text-decoration: none;
+    font-size: medium;
+}
+
+.boton-agregar:hover {
+    background-color: #644f4f;
+    cursor: pointer;
+}
+
+.botones {
+    width: calc(100% - 1.1rem);
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-cont {
+    width: 30%;
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .7rem 1.2rem;
+    text-decoration: none;
+    font-size: small;
+}
+
+/* Search bar centrada */
+.search-bar-centro {
+    margin: 20px auto;
+    max-width: 500px;
+    padding: 10px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    display: flex;
+}
+
+.search-bar-centro input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.search-bar-centro button {
+    padding: 8px 15px;
+    background-color: #7e6363;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar-centro button:hover {
+    background-color: #644f4f;
 }
