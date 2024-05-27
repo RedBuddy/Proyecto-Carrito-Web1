@@ -64,7 +64,7 @@ mysqli_close($db);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Página de Gestión de Productos</title>
+  <title>Página de notificaciones</title>
   <!-- Estilos -->
   <link rel="stylesheet" href="../../css/normalize.css" />
   <link rel="stylesheet" href="../../css/notificaciones.css" />

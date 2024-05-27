@@ -46,10 +46,10 @@ mysqli_close($db);
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página de Gestión de Usuarios</title>
+    <title>Página de ventas por usuario</title>
     <!-- Estilos -->
     <link rel="stylesheet" href="../../css/normalize.css" />
-    <link rel="stylesheet" href="../../css/gestion.css" />
+    <link rel="stylesheet" href="../../css/ventas_usuarios.css" />
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -100,18 +100,37 @@ mysqli_close($db);
         <button type="submit">Borrar</button>
     </form>
 
-    <div class="lista-productos" id="lista-productos">
-        <?php foreach ($usuarios as $usuario) : ?>
-            <div class="product-item" data-nombre="<?php echo strtolower($usuario['usuario']); ?>">
-                <div class="product-item-details">
-                    <h3><?php echo $usuario['usuario']; ?></h3>
-                    <p>Nombre: <?php echo $usuario['nombre']; ?></p>
-                    <p>Edad: <?php echo $usuario['edad']; ?></p>
-                    <p>Email: <?php echo $usuario['email']; ?></p>
-                    <a class="edit-button" href="historial_usuario.php?id=<?php echo $usuario['usuario']; ?>">Ver historial</a> <!-- Enlace de modificar -->
-                </div>
-            </div>
-        <?php endforeach; ?>
+    <div class="lista-productos tabla-notificaciones" id="lista-productos">
+        <table>
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Email</th>
+                    <th>Historial</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($usuarios as $usuario) : ?>
+                    <tr class="product-item" data-nombre="<?php echo strtolower($usuario['usuario']); ?>">
+                        <td>
+                            <h3><?php echo $usuario['usuario']; ?></h3>
+                        </td>
+                        <td>
+                            <p><?php echo $usuario['nombre']; ?></p>
+                        </td>
+                        <td>
+                            <p><?php echo $usuario['edad']; ?></p>
+                        </td>
+                        <td>
+                            <p><?php echo $usuario['email']; ?></p>
+                        </td>
+                        <td><a class="edit-button" href="historial_usuario.php?id=<?php echo $usuario['usuario']; ?>">Ver historial</a> <!-- Enlace de modificar --></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 
     <script>
@@ -121,7 +140,7 @@ mysqli_close($db);
             productos.forEach(function(producto) {
                 var nombre = producto.dataset.nombre.toLowerCase();
                 if (nombre.includes(filtro)) {
-                    producto.style.display = 'flex'; // Mostrar elementos que coinciden con el filtro
+                    producto.style.display = 'table-row'; // Mostrar elementos que coinciden con el filtro
                 } else {
                     producto.style.display = 'none'; // Ocultar elementos que no coinciden con el filtro
                 }

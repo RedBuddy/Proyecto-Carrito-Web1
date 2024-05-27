@@ -90,22 +90,40 @@ mysqli_close($db);
         <a class="boton-agregar" href="agregar_producto.php">Agregar producto</a>
     </div>
 
-    <div class="lista-productos" id="lista-productos">
-        <?php foreach ($productos as $producto) : ?>
-            <div class="product-item" data-nombre="<?php echo strtolower($producto['nombre']); ?>">
-                <img src="../<?php echo $producto['imagen']; ?>" alt="<?php echo $producto['nombre']; ?>" />
-                <div class="product-item-details">
-                    <h3><?php echo $producto['nombre']; ?></h3>
-                    <p>Precio: $<?php echo $producto['precio']; ?></p>
-                    <?php if ($producto['activo']) : ?>
-                        <button class="deactivate-button" data-id="<?php echo $producto['id']; ?>">Desactivar</button>
-                    <?php else : ?>
-                        <button class="activate-button" data-id="<?php echo $producto['id']; ?>">Activar</button>
-                    <?php endif; ?>
-                    <a class="edit-button" href="editar_producto.php?id=<?php echo $producto['id']; ?>">Modificar</a> <!-- Enlace de modificar -->
-                </div>
-            </div>
-        <?php endforeach; ?>
+    <div class="lista-productos tabla-notificaciones" id="lista-productos">
+        <table>
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($productos as $producto) : ?>
+                    <tr class="product-item" data-nombre="<?php echo strtolower($producto['nombre']); ?>">
+                        <td>
+                            <img src="../<?php echo $producto['imagen']; ?>" alt="<?php echo $producto['nombre']; ?>" />
+                        </td>
+                        <td>
+                            <h3><?php echo $producto['nombre']; ?></h3>
+                        </td>
+                        <td>
+                            <p><?php echo $producto['precio']; ?></p>
+                        </td>
+                        <td>
+                            <?php if ($producto['activo']) : ?>
+                                <button class="deactivate-button" data-id="<?php echo $producto['id']; ?>">Desactivar</button>
+                            <?php else : ?>
+                                <button class="activate-button" data-id="<?php echo $producto['id']; ?>">Activar</button>
+                            <?php endif; ?>
+                            <a class="edit-button" href="editar_producto.php?id=<?php echo $producto['id']; ?>">Modificar</a> <!-- Enlace de modificar -->
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 
     <script>
@@ -115,7 +133,7 @@ mysqli_close($db);
             productos.forEach(function(producto) {
                 var nombre = producto.dataset.nombre.toLowerCase();
                 if (nombre.includes(filtro)) {
-                    producto.style.display = 'flex'; // Mostrar elementos que coinciden con el filtro
+                    producto.style.display = 'table-row'; // Mostrar elementos que coinciden con el filtro
                 } else {
                     producto.style.display = 'none'; // Ocultar elementos que no coinciden con el filtro
                 }

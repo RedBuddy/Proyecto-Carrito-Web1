@@ -75,14 +75,14 @@ if (!isset($_SESSION['username'])) {
     <div class="subtitulo">
       <h2>Configuracion</h2>
     </div>
-    <div class="confi">
+    <!-- <div class="confi">
       <h4>
         Personaliza tu experiencia dentro de nuestra página web. Sumérgete en
         el mundo del café de alta calidad y descubre la magia de crear tu
         propia experiencia aromática. Personaliza cada detalle para que tu
         taza de café sea verdaderamente tuya.
       </h4>
-    </div>
+    </div> -->
   </div>
 
 

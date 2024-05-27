@@ -105,23 +105,44 @@ mysqli_close($db);
 
 
 
-    <div class="lista-productos" id="lista-productos">
-        <?php foreach ($usuarios as $usuario) : ?>
-            <div class="product-item" data-nombre="<?php echo strtolower($usuario['usuario']); ?>">
-                <div class="product-item-details">
-                    <h3><?php echo $usuario['usuario']; ?></h3>
-                    <p>Nombre: <?php echo $usuario['nombre']; ?></p>
-                    <p>Edad: <?php echo $usuario['edad']; ?></p>
-                    <p>Email: <?php echo $usuario['email']; ?></p>
-                    <?php if ($usuario['activo']) : ?>
-                        <button class="deactivate-button" data-id="<?php echo $usuario['id']; ?>">Desactivar</button>
-                    <?php else : ?>
-                        <button class="activate-button" data-id="<?php echo $usuario['id']; ?>">Activar</button>
-                    <?php endif; ?>
-                    <a class="edit-button" href="editar_usuario.php?id=<?php echo $usuario['id']; ?>">Modificar</a> <!-- Enlace de modificar -->
-                </div>
-            </div>
-        <?php endforeach; ?>
+    <div class="lista-productos tabla-notificaciones" id="lista-productos">
+        <table>
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($usuarios as $usuario) : ?>
+                    <tr class="product-item" data-nombre="<?php echo strtolower($usuario['usuario']); ?>">
+                        <td>
+                            <h3><?php echo $usuario['usuario']; ?></h3>
+                        </td>
+                        <td>
+                            <p><?php echo $usuario['nombre']; ?></p>
+                        </td>
+                        <td>
+                            <p><?php echo $usuario['edad']; ?></p>
+                        </td>
+                        <td>
+                            <p><?php echo $usuario['email']; ?></p>
+                        </td>
+                        <td>
+                            <?php if ($usuario['activo']) : ?>
+                                <button class="deactivate-button" data-id="<?php echo $usuario['id']; ?>">Desactivar</button>
+                            <?php else : ?>
+                                <button class="activate-button" data-id="<?php echo $usuario['id']; ?>">Activar</button>
+                            <?php endif; ?>
+                            <a class="edit-button" href="editar_usuario.php?id=<?php echo $usuario['id']; ?>">Modificar</a> <!-- Enlace de modificar -->
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 
     <script>
@@ -131,7 +152,7 @@ mysqli_close($db);
             productos.forEach(function(producto) {
                 var nombre = producto.dataset.nombre.toLowerCase();
                 if (nombre.includes(filtro)) {
-                    producto.style.display = 'flex'; // Mostrar elementos que coinciden con el filtro
+                    producto.style.display = 'table-row'; // Mostrar elementos que coinciden con el filtro
                 } else {
                     producto.style.display = 'none'; // Ocultar elementos que no coinciden con el filtro
                 }

@@ -195,7 +195,7 @@ body {
     background-color: #644f4f;
 }
 
-.lista-productos {
+/* .lista-productos {
     margin: 0 auto;
     max-width: 800px;
     padding: 20px;
@@ -243,7 +243,7 @@ body {
     max-width: 600px;
 }
 
-.product-item img {
+.product-item td img {
     width: 80px;
     height: 80px;
     margin-right: 20px;
@@ -262,6 +262,12 @@ body {
 
 .product-item-details p {
     margin: 1rem 0;
+} */
+
+.product-item td img {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
 }
 
 .activate-button {
@@ -419,33 +425,49 @@ body {
     font-size: small;
 }
 
-/* Search bar centrada */
-.search-bar-centro {
-    margin: 20px auto;
-    max-width: 500px;
-    padding: 10px;
+.tabla-notificaciones {
+    margin: 0 auto 2rem auto;
+    max-width: 70%;
     background-color: #f3f3f3;
-    border-radius: 5px;
-    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.search-bar-centro input[type="text"] {
-    flex: 1;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    margin-right: 10px;
+.tabla-notificaciones table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.search-bar-centro button {
-    padding: 8px 15px;
+.tabla-notificaciones th,
+.tabla-notificaciones td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.tabla-notificaciones th {
+    background-color: #7e6363;
+    color: white;
+}
+
+.tabla-notificaciones td button {
     background-color: #7e6363;
     color: white;
     border: none;
     border-radius: 5px;
+    padding: 8.9px 12px;
     cursor: pointer;
+    margin-right: 5px;
 }
 
-.search-bar-centro button:hover {
+.tabla-notificaciones td button:hover {
     background-color: #644f4f;
+}
+
+.status-mensaje {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    gap: 1rem;
 }
