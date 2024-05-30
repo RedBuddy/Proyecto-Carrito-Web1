@@ -44,7 +44,6 @@ if (isset($_SESSION["carrito"]) && is_array($_SESSION["carrito"]) && !empty($_SE
     $db->close();
 }
 ?>
-?>
 <!DOCTYPE html>
 <html lang="es">
 

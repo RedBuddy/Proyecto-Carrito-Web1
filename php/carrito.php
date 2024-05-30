@@ -40,7 +40,7 @@ if (!isset($_SESSION['username'])) {
 
         <div class="header-links">
             <a class="link" href="productos.php">Productos</a>
-            <a class="link seleccionado" href="configuracion.php">Configuracion</a>
+            <a class="link" href="configuracion.php">Configuracion</a>
             <a class="link" href="contacto.php">Contacto</a>
             <a class="link" href="informes/historialCompras.php">Historial compras</a>
 

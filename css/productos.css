@@ -302,3 +302,12 @@ ul {
     text-align: center;
     margin-bottom: 2rem;
 }
+
+#alerta_verde {
+    margin: 0;
+    padding: 1rem;
+    color: black;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(55, 203, 55);
+}

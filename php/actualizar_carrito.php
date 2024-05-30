@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["actualizar"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pagar"])) {
 
     if (pagarProductos($_SESSION["carrito"])) {
-        header("Location: compra.php");
+        header("Location: pago.php");
         exit;
     } else {
         $_SESSION["error_compra"] = "Error: No hay stock suficiente para completar la compra, ajusta la cantidad correctamente.";

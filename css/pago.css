@@ -1,0 +1,187 @@
+body {
+    background-color: #E1CA96;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-logo img {
+    width: 3.3rem;
+    height: 3.3rem;
+    margin-top: .5rem;
+}
+
+.header-logo h1 {
+    font-family: "Island Moments", cursive;
+    font-size: 4rem;
+    font-weight: normal;
+    color: #434A42;
+    margin: 0;
+}
+
+.header-logo {
+    margin-top: .5rem;
+    display: flex;
+    text-decoration: none;
+}
+
+.header-links {
+    /* float: right; */
+    display: flex;
+    gap: 2rem;
+    margin: 1.7rem 6rem;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    font-weight: normal;
+    margin-top: .5rem;
+}
+
+.seleccionado {
+    font-weight: bold;
+}
+
+.boton {
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .7rem 1.2rem;
+    text-decoration: none;
+    font-size: small;
+}
+
+.boton:hover {
+    background-color: #644f4f;
+    cursor: pointer;
+}
+
+.banner {
+    background-color: #ACA885;
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtitulo h2 {
+    font-size: 3.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: normal;
+    margin: 2.5rem 0 1.5rem 5.5rem;
+}
+
+.boton {
+    border-radius: .4rem;
+    border-style: none;
+    background-color: #7E6363;
+    color: white;
+    padding: .7rem 1.2rem;
+    text-decoration: none;
+    font-size: small;
+    width: 30%;
+}
+
+.boton:hover {
+    background-color: #644f4f;
+    cursor: pointer;
+}
+
+.contenedor-centrado {
+    /* display: flex;
+    justify-content: center; */
+    background-color: #918B76;
+    border: .1rem solid white;
+    border-radius: .5rem;
+    margin: 3rem 6rem;
+    padding: 2rem;
+}
+
+
+.pago h1 {
+    text-align: center;
+    color: white;
+    font-weight: normal;
+    font-size: 1.5rem;
+}
+
+.form-pago {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    gap: 1rem;
+    color: white;
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+.form-pago input {
+    border-style: none;
+    border-radius: .3rem;
+    padding: .5rem;
+}
+
+.num-tarjeta input {
+    width: 49rem;
+}
+
+.datos-tarjeta {
+    display: flex;
+    gap: 1rem;
+}
+
+.expiracion input {
+    width: 5rem;
+    text-align: center;
+}
+
+.cvv input {
+    width: 2.5rem;
+    text-align: center;
+}
+
+.centrar {
+    display: flex;
+    justify-content: center;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0 0 0;
+}
+
+.direccion {
+    margin-bottom: 3rem;
+}
+
+.direccion h1 {
+    text-align: center;
+    color: white;
+    font-weight: normal;
+    font-size: 1.5rem;
+}
+
+.form-direccion {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    color: white;
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+#alerta_roja {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(185, 56, 56);
+}

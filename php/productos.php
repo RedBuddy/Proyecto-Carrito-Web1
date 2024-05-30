@@ -114,6 +114,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
         ];
     }
 
+    $_SESSION["carrito_agregado"] = "Producto agregado al carrito!";
+
     mysqli_close($db);
     header("Location: {$_SERVER['PHP_SELF']}?pagina=$pagina");
     exit;
@@ -196,6 +198,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
             <button class="btn-buscar" type="submit">Buscar</button>
         </form>
     </div>
+
+    <?php
+    if (isset($_SESSION["carrito_agregado"])) {
+        echo "<p id='alerta_verde'>{$_SESSION["carrito_agregado"]}</p>";
+        unset($_SESSION["carrito_agregado"]);
+    }
+    ?>
 
     <nav class="navegacion-mas-vendidos">
         <h2>Productos Más Vendidos</h2>
@@ -287,6 +296,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
                     producto.style.display = "none";
                 }
             });
+        });
+
+        // JavaScript to hide the notification after 3 seconds
+        document.addEventListener("DOMContentLoaded", function() {
+            const notification = document.getElementById('alerta_verde');
+            if (notification) {
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 3000);
+            }
         });
     </script>
 </body>
