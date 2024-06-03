@@ -66,7 +66,7 @@ GROUP BY
     dv.Producto
 ORDER BY 
     total_vendido DESC
-LIMIT 5";
+LIMIT 10";
 
 $res_mas_vendidos = mysqli_query($db, $query_mas_vendidos);
 
@@ -206,31 +206,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
     }
     ?>
 
-    <nav class="navegacion-mas-vendidos">
+    <div class="contenedor-nav-trend">
         <h2>Productos Más Vendidos</h2>
-        <ul class="nav-trend">
-            <?php foreach ($productos_mas_vendidos as $producto) : ?>
-                <li class="trend-li">
-                    <div class="trend-producto">
-                        <div class="trend-cont-img">
-                            <img src="<?php echo $producto['Imagen']; ?>" alt="imagen producto">
+        <nav class="navegacion-mas-vendidos">
+            <button id="prev-trend" class="trend-nav">&laquo;</button>
+            <ul class="nav-trend">
+                <?php foreach ($productos_mas_vendidos as $producto) : ?>
+                    <li class="trend-li">
+                        <div class="trend-producto">
+                            <div class="trend-cont-img">
+                                <img src="<?php echo $producto['Imagen']; ?>" alt="imagen producto">
+                            </div>
+                            <h3 class="trend-titulo-producto"><?php echo $producto['Nombre']; ?></h3>
+                            <h3 class="trend-stock-producto">Disponibles: <span><?php echo $producto['Stock']; ?></span></h3>
+                            <div class="trend-cont-precio-boton">
+                                <h3 class="trend-precio-producto">$<?php echo $producto['Precio']; ?> / pz</h3>
+                                <form method="post" action="">
+                                    <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
+                                    <button class="trend-agregar-carrito" type="submit" name="agregar">Agregar al carrito</button>
+                                </form>
+                            </div>
                         </div>
-                        <h3 class="trend-titulo-producto"><?php echo $producto['Nombre']; ?></h3>
-                        <h3 class="trend-stock-producto">Disponibles: <span><?php echo $producto['Stock']; ?></span></h3>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <button id="next-trend" class="trend-nav">&raquo;</button>
+        </nav>
+    </div>
 
-                        <div class="trend-cont-precio-boton">
-                            <h3 class="trend-precio-producto">$<?php echo $producto['Precio']; ?> / pz</h3>
-                            <form method="post" action="">
-                                <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
-                                <button class="trend-agregar-carrito" type="submit" name="agregar">Agregar al carrito</button>
-                            </form>
-                        </div>
 
-                    </div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </nav>
 
     <div class="contenedor-centrado">
         <ul class="contenedor-productos" id="lista-productos">
@@ -284,6 +288,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["agregar"])) {
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const prevBtn = document.getElementById('prev-trend');
+            const nextBtn = document.getElementById('next-trend');
+            const trendList = document.querySelector('.nav-trend');
+
+            let scrollAmount = 0;
+            const scrollStep = 220; // Ajusta según el tamaño del producto y el margen
+
+            prevBtn.addEventListener('click', () => {
+                trendList.scrollTo({
+                    top: 0,
+                    left: (scrollAmount -= scrollStep),
+                    behavior: 'smooth'
+                });
+
+                if (scrollAmount < 0) {
+                    scrollAmount = 0;
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (scrollAmount <= trendList.scrollWidth - trendList.clientWidth) {
+                    trendList.scrollTo({
+                        top: 0,
+                        left: (scrollAmount += scrollStep),
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+
         // Script para filtrar productos
         document.getElementById("filtro").addEventListener("submit", function() {
             var filtro = this.value.toLowerCase();

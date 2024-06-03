@@ -234,6 +234,7 @@ ul {
     background-color: rgba(214, 203, 203);
 }
 
+/* 
 .navegacion-mas-vendidos {
     background-color: #918B76;
     padding: 1rem;
@@ -253,7 +254,7 @@ ul {
     background-color: white;
     padding: 1rem;
     width: 17rem;
-}
+} */
 
 .trend-cont-img {
     display: flex;
@@ -297,11 +298,11 @@ ul {
     font-size: .8rem;
 }
 
-.navegacion-mas-vendidos h2 {
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 2rem;
+.trend-agregar-carrito:hover {
+    background-color: #644f4f;
+    cursor: pointer;
 }
+
 
 #alerta_verde {
     margin: 0;
@@ -310,4 +311,53 @@ ul {
     justify-content: center;
     text-align: center;
     background-color: rgb(55, 203, 55);
+}
+
+.contenedor-nav-trend {
+    background-color: #918B76;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: .3rem;
+}
+
+.contenedor-nav-trend h2 {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+
+.navegacion-mas-vendidos {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+}
+
+.navegacion-mas-vendidos img {
+    width: 5rem;
+}
+
+.trend-nav {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+
+.nav-trend {
+    border-radius: .3rem;
+    gap: 1rem;
+    display: flex;
+    overflow: hidden;
+    width: calc(100% - 4rem);
+}
+
+.trend-li {
+    border-radius: .3rem;
+    background-color: white;
+    padding: 1rem;
+    min-width: 16rem;
 }
