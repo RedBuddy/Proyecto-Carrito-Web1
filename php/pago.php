@@ -6,8 +6,23 @@ if (!isset($_SESSION['username'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pagar"])) {
+    $_SESSION['direccion_envio'] = $_POST['direccion'] . ', ' . $_POST['cp'] . ', ' . $_POST['pais'];
     header("Location: compra.php");
     exit;
+}
+
+if (isset($_SESSION["carrito"]) && is_array($_SESSION["carrito"]) && !empty($_SESSION["carrito"])) {
+    $productos = $_SESSION["carrito"];
+    $total = 0;
+
+    foreach ($productos as $producto) {
+        $cantidad = $producto['cantidad'];
+        $precio_unitario = $producto['precio'];
+        $subtotal = $cantidad * $precio_unitario;
+
+        // Calcular el total de la venta
+        $total += $subtotal;
+    }
 }
 
 
@@ -69,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pagar"])) {
             if (isset($_SESSION["carrito"]) && is_array($_SESSION["carrito"])) {
                 $cantidadProductos = count($_SESSION["carrito"]);
             }
-            echo "<a class='boton btn-carrito' href='carrito.php'>Carrito (<span class='boton-carrito'>{$cantidadProductos}</span>)</a>";
+            echo "<a class='btn-carrito' href='carrito.php'>Carrito (<span class='boton-carrito'>{$cantidadProductos}</span>)</a>";
             ?>
         </div>
     </header>
@@ -83,52 +98,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["pagar"])) {
     <p id="alerta_roja" style="display: none;">Datos de tarjeta no válidos.</p>
 
     <div class="contenedor-centrado">
-        <div class="direccion">
-            <h1>Datos de envío</h1>
-            <div class="centrar">
-                <form class="form-direccion">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" name="nombre" placeholder="ingrese un nombre" required>
+        <form class="form-pago" id="payment-form" method="POST">
+            <div class="direccion">
+                <h1>Datos de envío</h1>
+                <div class="centrar">
+                    <div class="form-direccion">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" placeholder="ingrese un nombre" required>
 
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" name="direccion" placeholder="ingrese calle y número" required>
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" name="direccion" placeholder="ingrese calle y número" required>
 
-                    <label for="cp">Código Postal:</label>
-                    <input type="text" name="cp" placeholder="ingrese código postal" required>
+                        <label for="cp">Código Postal:</label>
+                        <input type="text" name="cp" placeholder="ingrese código postal" required>
 
-                    <label for="pais">País:</label>
-                    <input type="text" name="pais" placeholder="ingrese país" required>
+                        <label for="pais">País:</label>
+                        <input type="text" name="pais" placeholder="ingrese país" required>
 
-                </form>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="pago">
-            <h1>Datos de la tarjeta</h1>
-            <div class="centrar">
-                <form class="form-pago" id="payment-form" method="POST">
-                    <div class="num-tarjeta">
-                        <label for="card-number">Número de Tarjeta:</label>
-                        <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
-                    </div>
-                    <div class="datos-tarjeta">
-                        <div class="expiracion">
-                            <label for="expiry-date">Fecha de Expiración:</label>
-                            <input type="text" id="expiry-date" placeholder="MM/AA" required>
+            <div class="pago">
+                <h1>Datos de la tarjeta</h1>
+                <div class="centrar">
+                    <div class="formu-pago">
+                        <div class="num-tarjeta">
+                            <label for="card-number">Número de Tarjeta:</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
                         </div>
-                        <div class="cvv">
-                            <label for="cvv">CVV:</label>
-                            <input type="text" id="cvv" placeholder="123" required>
+                        <div class="datos-tarjeta">
+                            <div class="expiracion">
+                                <label for="expiry-date">Fecha de Expiración:</label>
+                                <input type="text" id="expiry-date" placeholder="MM/AA" required>
+                            </div>
+                            <div class="cvv">
+                                <label for="cvv">CVV:</label>
+                                <input type="text" id="cvv" placeholder="123" required>
+                            </div>
                         </div>
-
+                        <div class="contenedor-total">
+                            <p class="total">Total a pagar: <span><?php echo $total; ?>$</span></p>
+                        </div>
+                        <div class="botones">
+                            <button class="boton" id="generate-card">Cargar Tarjeta Guardada</button>
+                            <button class="boton btn-pagar" type="submit" name="pagar">Pagar</button>
+                        </div>
                     </div>
-                    <div class="botones">
-                        <button class="boton" id="generate-card">Cargar Tarjeta Guardada</button>
-                        <button class="boton btn-pagar" type="submit" name="pagar">Pagar</button>
-                    </div>
-                </form>
+                </div>
             </div>
-
-        </div>
+        </form>
     </div>
 
     <script src="../js/pago.js"></script>

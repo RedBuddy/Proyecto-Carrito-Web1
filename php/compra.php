@@ -97,11 +97,14 @@ if (isset($_SESSION["carrito"]) && is_array($_SESSION["carrito"]) && !empty($_SE
                 </div>
             </div>
 
-            <?php unset($_SESSION["carrito"]); ?>
+            <h3 class="direccion">Dirección: <span><?php echo $_SESSION['direccion_envio']; ?></span></h2>
 
-            <div class="registro-botones">
-                <a class="boton btn-continuar" href="../php/productos.php">Continuar</a>
-            </div>
+                <?php unset($_SESSION["carrito"]); ?>
+                <?php unset($_SESSION["direccion_envio"]); ?>
+
+                <div class="registro-botones">
+                    <a class="boton btn-continuar" href="../php/productos.php">Continuar</a>
+                </div>
         </form>
     </section>
 
